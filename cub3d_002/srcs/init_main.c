@@ -20,6 +20,6 @@ int		repeat(t_game *g)
 
 void	exitit(char *str)
 {
-	ft_putendl(str);
+	printf("%s\n",str);
 	exit(0);
 }

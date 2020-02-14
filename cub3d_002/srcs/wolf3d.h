@@ -6,7 +6,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
-# include "../libft/libft.h"
 # include "../minilibx/mlx.h"
 
 # define HEIGHT 840

@@ -21,11 +21,9 @@ $(NAME): $(SRC)
 	$(CC) $(FLAGS) $(FLAGS2) $(SRC) -o wolf3d
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
 	rm -rf $(OBJS)
 
 fclean: clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
 re: fclean all

@@ -45,8 +45,11 @@ typedef struct		s_game
 	int				end_s;
 	int				bpp_s;
 
-	int				tx_x;
-	int				tx_y;
+	int				id;
+	int				texture;
+	int				x_text;
+	int				y_text;
+	double			x_wall;
 
 
 
@@ -57,7 +60,7 @@ typedef struct		s_game
 	void			*img;
 
 	void			*healthbar;
-	int				*imgpoke;
+	void			*imgpoke;
 
 
 	int				*imghealth;
@@ -114,6 +117,7 @@ typedef struct		s_game
 	double			rotspeed;
 	double			oldplanex;
 	double			olddirx;
+	int				speedup;
 
 
 	int				upkey;
@@ -149,6 +153,9 @@ void				makewindow(t_game *g);
 void				redraw(t_game *g);
 int					repeat(t_game *g);
 void				draw_background(t_game *g, int x);
-void    draw_texture_wall(t_game *mlx, int x, int y);
+void    draw_texture_wall(int x, t_game *t);
+void    import_textures(t_game *g);
+int	wall_direction(t_game *ray);
+void	put_pxl_to_img(t_game *t, int x, int y, int color);
 
 #endif

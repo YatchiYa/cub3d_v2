@@ -24,10 +24,12 @@ int				close_win(t_game *g)
 
 int				main(int argc, char **argv)
 {
-	t_game	g;
+	t_game	*g;
 	
 	if (!argc && !argv)
 		return (0);
-	map(&g);
-	makewindow(&g);
+	if (!(g = (t_game *)malloc(sizeof(t_game))))
+		return (0);
+	map(g);
+	makewindow(g);
 }

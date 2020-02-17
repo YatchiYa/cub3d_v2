@@ -107,8 +107,15 @@ void	leftmove(t_game *g)
 	}
 }
 
+void	speedmove(t_game *g)
+{
+	g->movespeed = 0.15;
+	redraw(g);
+}
+
 int		keyhooks(int key, t_game *g)
 {
+	printf("\n ddebug %d \n", key);
 	(void)(g);
 	if (key == 53)
 		exitit("Exiting");
@@ -124,5 +131,8 @@ int		keyhooks(int key, t_game *g)
 		right_move(g);
 	else if (g->lf_move == 1)
 		letf_move(g);
+	
+	if (g->speedup == 1)
+		speedmove(g);
 	return (0);
 }

@@ -15,7 +15,19 @@ int		key_press(int key, t_game *g)
 		g->lf_move = 1;
 	else if (key == 2)
 		g->rk_move = 1;
+	else if (key == 257)
+		g->speedup = 1;
 	keyhooks(key, g);
+	if (key == 17 && g->texture == 0)
+	{
+		g->texture = 1;
+		redraw(g);
+	}
+	else if (key == 17 && g->texture == 1)
+	{
+		g->texture = 0;
+		redraw(g);
+	}
 	return (0);
 }
 
@@ -33,6 +45,8 @@ int		key_release(int key, t_game *g)
 		g->rk_move = 0;
 	else if (key == 0)
 		g->lf_move = 0;
+	else if (key == 257)
+		g->speedup = 0;
 	keyhooks(key, g);
 	return (0);
 }
@@ -55,7 +69,7 @@ void	makewindow(t_game *g)
 {
 	g->mlx = mlx_init();
 	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-	g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "Wolf3D");
+	g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "cub3D");
 
 	g->imgpoke = (int*)mlx_get_data_addr(g->img, &g->bpp, &(g->sl), &(g->end));
 	

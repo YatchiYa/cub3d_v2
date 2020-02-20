@@ -2,38 +2,38 @@
 #include <stdio.h>
 
 
-void	letf_move(t_game *g)
+void	right_move(t_game *g)
 {
 	int x;
 	int y;
 
-	x = (int)(g->posx + g->dirx * g->movespeed);
-	y = (int)(g->posy + g->diry * g->movespeed);
-	if (g->lf_move == 1)
+	x = (int)(g->posx + g->diry * g->movespeed);
+	y = (int)(g->posy - g->dirx * g->movespeed);
+	if (g->rk_move == 1)
 	{
 		if (g->worldmap[x][y] == '0')
 		{
-			g->posx -= g->dirx * g->movespeed;
-			g->posy += g->diry * g->movespeed;
+			g->posy -= g->dirx * g->movespeed;
+			g->posx += g->diry * g->movespeed;
 			redraw(g);
 		}
 	}
 }
 
 
-void	right_move(t_game *g)
+void	letf_move(t_game *g)
 {
 	int x;
 	int y;
 
-	x = (int)(g->posx + g->dirx * g->movespeed);
-	y = (int)(g->posy + g->diry * g->movespeed);
-	if (g->rk_move == 1)
+	x = (int)(g->posx - g->diry * g->movespeed);
+	y = (int)(g->posy + g->dirx * g->movespeed);
+	if (g->lf_move == 1)
 	{
 		if (g->worldmap[x][y] == '0')
 		{
-			g->posx += g->dirx * g->movespeed;
-			g->posy -= g->diry * g->movespeed;
+			g->posy += g->dirx * g->movespeed;
+			g->posx -= g->diry * g->movespeed;
 			redraw(g);
 		}
 	}
@@ -115,7 +115,7 @@ void	speedmove(t_game *g)
 
 int		keyhooks(int key, t_game *g)
 {
-	printf("\n ddebug %d \n", key);
+	// printf("\n ddebug %d \n", key);
 	(void)(g);
 	if (key == 53)
 		exitit("Exiting");

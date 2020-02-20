@@ -24,16 +24,23 @@ int	wall_direction(t_game *ray)
 	return ((ray->raydirx < 0) ? WALL_W : WALL_E);
 }
 
+int	wall_tex(t_game *ray)
+{
+	if (ray->side)
+		return ((ray->raydiry < 0) ? 1 : 2 );
+	return ((ray->raydirx < 0) ? 3 : 4);
+}
 
 void	put_pxl_to_img(t_game *t, int x, int y, int color)
 {
 	if (t->texture == 1 && x < WIDTH && y < HEIGHT)
 	{
+		int id = wall_tex(t);
 		t->y_text = abs((((y * 256 - HEIGHT * 128 + t->lineheight * 128) * 64)
 					/ t->lineheight) / 256);
 		ft_memcpy(t->imgpoke + 4 * WIDTH * y + x * 4,
-				&t->tex_arr[0].data[t->y_text % 64 * t->tex_arr[0].sizeline +
-				t->x_text % 64 * t->tex_arr[0].bpp / 8], sizeof(int));
+			&t->tex_arr[id].data[t->y_text % 64 * t->tex_arr[id].sizeline +
+			t->x_text % 64 * t->tex_arr[id].bpp / 8], sizeof(int));
 	}
 	else if (x < WIDTH && y < HEIGHT)
 		ft_memcpy(t->imgpoke + 4 * WIDTH * y + x * 4,
@@ -105,8 +112,8 @@ void	draw_sky(t_game *t)
 		while (t->y_text < HEIGHT / 2)
 		{
 			ft_memcpy(t->imgpoke + 4 * WIDTH * t->y_text + t->x_text * 4,
-					&t->tex_arr[1].data[t->y_text % 512 * t->tex_arr[1].sizeline +
-					t->x_text % 512 * t->tex_arr[1].bpp / 8], sizeof(int));
+					&t->tex_arr[5].data[t->y_text % 512 * t->tex_arr[5].sizeline +
+					t->x_text % 512 * t->tex_arr[5].bpp / 8], sizeof(int));
 			t->y_text++;
 		}
 		t->x_text++;
@@ -122,14 +129,13 @@ void	draw_floor(t_game *t)
 		while (t->y_text < HEIGHT)
 		{
 			ft_memcpy(t->imgpoke + 4 * WIDTH * t->y_text + t->x_text * 4,
-					&t->tex_arr[2].data[t->y_text % 64 * t->tex_arr[2].sizeline +
-					t->x_text % 64 * t->tex_arr[2].bpp / 8], sizeof(int));
+					&t->tex_arr[6].data[t->y_text % 64 * t->tex_arr[6].sizeline +
+					t->x_text % 64 * t->tex_arr[6].bpp / 8], sizeof(int));
 			t->y_text++;
 		}
 		t->x_text++;
 	}
 }
-
 
 
 void	raycast_init(t_game *g)
@@ -219,7 +225,14 @@ void	raycast_draw(t_game *g)
 	else
 		g->color = 0x00FF00;
 	draw_wallxx(g->x, g->drawstart - 1, g->drawend, g);
-	draw_sky_floor(g->x, g);
+	if (g->texture == 1)
+	{
+		floor_cast(g);
+		sky_cast(g);
+	}
+	else
+		draw_sky_floor(g->x, g);
+		
 }
 
 
@@ -237,5 +250,7 @@ void	raycast_procjection(t_game *g)
 		raycast_dist(g);
 		raycat_object(g);
 		raycast_draw(g);
+		g->ZBuffer[g->x] = g->perpwalldist;
 	}
+	sprite_cast(g);
 }

@@ -3,13 +3,13 @@
 void			map(t_game *g)
 {
 	g->worldmap[0] = "1111111111";
-	g->worldmap[1] = "1003000201";
-	g->worldmap[2] = "1003000201";
+	g->worldmap[1] = "1000000001";
+	g->worldmap[2] = "1000000001";
 	g->worldmap[3] = "1100000001";
-	g->worldmap[4] = "1000330001";
-	g->worldmap[5] = "1000033001";
-	g->worldmap[6] = "1004004001";
-	g->worldmap[7] = "1104444001";
+	g->worldmap[4] = "1000110001";
+	g->worldmap[5] = "1000011001";
+	g->worldmap[6] = "1001001001";
+	g->worldmap[7] = "1101111001";
 	g->worldmap[8] = "1000000001";
 	g->worldmap[9] = "1111111111";
 }

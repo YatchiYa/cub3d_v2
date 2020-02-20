@@ -12,6 +12,8 @@
 # define WIDTH 1280
 # define MAPH 10
 # define MAPW 10
+# define texWidth 64
+# define texHeight 64
 # define WALL_T 0x0D3558
 # define WALL_B 0x0B2D4B
 # define WALL_N 0x174F80
@@ -19,6 +21,15 @@
 # define WALL_S 0x14446e
 # define WALL_W 0x804d17
 
+# define NONE 0xFF000000
+# define WHITE 0x00FFFFFF
+# define BLACK 0x00000000
+# define RED 0x00FF0000
+# define GREEN 0x0000FF00
+# define BLUE 0x000000FF
+# define MAGENTA 0x00FF00FF
+# define YELLOW 0x00FFFF00
+# define CYAN 0x0000FFFF
 
 typedef struct	s_image
 {
@@ -30,10 +41,17 @@ typedef struct	s_image
 }				t_image;
 
 
+typedef struct	sprite
+{
+	double x;
+	double y;
+	double d;
+}				t_sprite;
 
 typedef struct		s_game
 {
 	t_image		tex_arr[9];
+	t_sprite	sprite;
 
 	void			*wall_tex;
 	int				tex_hit_id;
@@ -79,6 +97,7 @@ typedef struct		s_game
 	double			posy;
 	double			dirx;
 	double			diry;
+	double			dira;
 	double			planex;
 	double			planey;
 	double			time;
@@ -127,6 +146,35 @@ typedef struct		s_game
 	int				rk_move;
 	int				lf_move;
 	unsigned char	chan[3];
+
+
+	double			rayDirX0;
+	double			rayDirY0;
+	double			rayDirX1;
+	double			rayDirY1;
+	int				p;
+	double			posZ;
+	double			rowDistance;
+	double			floorStepX;
+	double			floorStepY;
+	double			floorX;
+	double			floorY;
+	int				cellX;
+	int				cellY;
+	int				tx;
+	int				ty;
+	double			floorXWall;
+	double			floorYWall;
+	double			distWall;
+	double			distPlayer;
+	double			currentDist;
+	double			weight;
+	double			currentFloorX;
+	double			currentFloorY;
+	int			floorTexX;
+	int			floorTexY;
+	double		ZBuffer[WIDTH];
+
 }					t_game;
 
 void				map(t_game *g);
@@ -157,5 +205,9 @@ void    draw_texture_wall(int x, t_game *t);
 void    import_textures(t_game *g);
 int	wall_direction(t_game *ray);
 void	put_pxl_to_img(t_game *t, int x, int y, int color);
+void        floor_cast(t_game *g);
+void        sky_cast(t_game *g);
+void      sprite_cast(t_game *g);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif

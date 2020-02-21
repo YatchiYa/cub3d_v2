@@ -20,7 +20,6 @@
 # define WALL_E 0x1B5C96
 # define WALL_S 0x14446e
 # define WALL_W 0x804d17
-
 # define NONE 0xFF000000
 # define WHITE 0x00FFFFFF
 # define BLACK 0x00000000
@@ -41,58 +40,68 @@ typedef struct	s_image
 }				t_image;
 
 
-typedef struct	sprite
+typedef struct	s_sprite
 {
-	double x;
-	double y;
-	double d;
+	double		x;
+	double		y;
+	int			texture;
 }				t_sprite;
+
+
+typedef struct	s_raysprite
+{
+	int			i;
+	double		spritex;
+	double		spritey;
+	double		invdet;
+	double		tx;
+	double		ty;
+	int			spritescreenx;
+	int			spriteheight;
+	int			drawstarty;
+	int			drawendy;
+	int			spritewidth;
+	int			drawstartx;
+	int			drawendx;
+	int			stripe;
+	int			y;
+	int			texx;
+	int			d;
+	int			texy;
+}				t_raysprite;
 
 typedef struct		s_game
 {
-	t_image		tex_arr[9];
-	t_sprite	sprite;
-
+	t_image			tex_arr[9];
+	t_sprite		sprite[5];
 	void			*wall_tex;
 	int				tex_hit_id;
-	
 	int				*data_wall_tex;
 	int				wall_tex_height;
 	int				wall_tex_width;
 	int				sl_s;
 	int				end_s;
 	int				bpp_s;
-
 	int				id;
 	int				texture;
 	int				x_text;
 	int				y_text;
 	double			x_wall;
-
-
-
-
 	char			*worldmap[MAPH];
 	void			*mlx;
 	void			*win;
 	void			*img;
-
 	void			*healthbar;
 	void			*imgpoke;
-
-
 	int				*imghealth;
-
 	int				sl;
 	int				end;
 	int				bpp;
-
 	int				health_w;
 	int				health_h;
 	int				health_bpp;
 	int				health_sl;
 	int				health_end;
-
 	double			posx;
 	double			posy;
 	double			dirx;
@@ -108,7 +117,6 @@ typedef struct		s_game
 	double			raydirx;
 	double			raydiry;
 	int				wall_at_ray_pos;
-	
 	int				mapx;
 	int				mapy;
 	double			sidedistx;
@@ -125,7 +133,6 @@ typedef struct		s_game
 	int				w;
 	int				d;
 	int				h;
-	
 	int				color;
 	int				lineheight;
 	int				drawstart;
@@ -137,17 +144,12 @@ typedef struct		s_game
 	double			oldplanex;
 	double			olddirx;
 	int				speedup;
-
-
 	int				upkey;
 	int				downkey;
 	int				leftkey;
 	int				rightkey;
 	int				rk_move;
 	int				lf_move;
-	unsigned char	chan[3];
-
-
 	double			rayDirX0;
 	double			rayDirY0;
 	double			rayDirX1;
@@ -171,43 +173,49 @@ typedef struct		s_game
 	double			weight;
 	double			currentFloorX;
 	double			currentFloorY;
-	int			floorTexX;
-	int			floorTexY;
-	double		ZBuffer[WIDTH];
+	int				floorTexX;
+	int				floorTexY;
+	double			*zbuffer;
+	unsigned char	chan[3];
 
 }					t_game;
 
 void				map(t_game *g);
 void				exitit(char	*str);
 int					close_win(t_game *g);
-unsigned int	pick_color(int i, double x, double y);
-void			draw_wall(t_game *g, int x);
+unsigned int		pick_color(int i, double x, double y);
+void				draw_wall(t_game *g, int x);
 void				player(t_game *g);
 void				wall_color(t_game *g);
 void				init_game(t_game *g);
 void				raycast_procjection(t_game *g);
 void				printcontrols(int i);
 void				errorcheck(char *str);
-void				upmove(t_game *g);
-void				downmove(t_game *g);
-void				rightmove(t_game *g);
-void				leftmove(t_game *g);
-void				right_move(t_game *g);
-void				left_move(t_game *g);
-int					keyhooks(int key, t_game *g);
 int					key_press(int key, t_game *g);
 int					key_release(int key, t_game *g);
 void				makewindow(t_game *g);
 void				redraw(t_game *g);
 int					repeat(t_game *g);
 void				draw_background(t_game *g, int x);
-void    draw_texture_wall(int x, t_game *t);
-void    import_textures(t_game *g);
-int	wall_direction(t_game *ray);
-void	put_pxl_to_img(t_game *t, int x, int y, int color);
-void        floor_cast(t_game *g);
-void        sky_cast(t_game *g);
-void      sprite_cast(t_game *g);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+void    			draw_texture_wall(int x, t_game *t);
+void    			import_textures(t_game *g);
+int					wall_direction(t_game *ray);
+void				put_pxl_to_img(t_game *t, int x, int y, int color);
+void        		floor_cast(t_game *g);
+void        		sky_cast(t_game *g);
+void      			sprite_cast(t_game *g);
+void				*ft_memcpy(void *dst, const void *src, size_t n);
+void				draw_sprite(t_game *e, t_game *rc, t_raysprite *rs);
+void				ray_sprite(t_game *e, t_raysprite *rs);
+
+
+void				upmove(t_game *g);
+void				downmove(t_game *g);
+void				rightmove(t_game *g);
+void				leftmove(t_game *g);
+void				right_move(t_game *g);
+void				letf_move(t_game *g);
+void				speedmove(t_game *g);
+int					keyhooks(int key, t_game *g);
 
 #endif

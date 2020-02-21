@@ -39,69 +39,6 @@
 // }
 
 
-void      sprite_cast(t_game *g)
-{
-    g->sprite.y = 7.;
-    g->sprite.x = 1.;
-    printf("\n debug sprite %f \n", g->sprite.y);
-    double spriteX = g->sprite.x - g->posx;
-    double spriteY = g->sprite.y - g->posy;
-    double invDet = 1.0 / (g->planex * g->diry - g->dirx * g->planey);
-    double transformX = invDet * (g->diry * spriteX - g->dirx * spriteY);
-    double transformY = invDet * (-g->planey * spriteX + g->planex * spriteY); //this is actually the depth inside the screen, that what Z is in 3D
-
-      int spriteScreenX = (int)((g->w / 2) * (1 + transformX / transformY));
-
-      //calculate height of the sprite on screen
-      int spriteHeight = abs((int)(g->h / (transformY))); //using 'transformY' instead of the real distance prevents fisheye
-      //calculate lowest and highest pixel to fill in current stripe
-      int drawStartY = -spriteHeight / 2 + g->h / 2;
-      
-      if(drawStartY < 0) drawStartY = 0;
-      int drawEndY = spriteHeight / 2 + g->h / 2;
-      if(drawEndY >= g->h) drawEndY = g->h - 1;
-
-      //calculate width of the sprite
-      int spriteWidth = abs( (int) (g->h / (transformY)));
-      int drawStartX = -spriteWidth / 2 + spriteScreenX;
-
-      if(drawStartX < 0) drawStartX = 0;
-      int drawEndX = spriteWidth / 2 + spriteScreenX;
-      if(drawEndX >= g->w) drawEndX = g->w - 1;
-      int stripe = drawStartX;
-      while ( stripe < drawStartX)
-      {
-        int sp_x = (int)(256 * (stripe - (-spriteWidth
-			/ 2 + spriteScreenX)) * 64 /
-			spriteWidth / 256);
-
-          // sprite 
-          int d;
-          int y;
-
-          y = drawStartY;
-          if (transformY > 0 && stripe > 0 && stripe < g->w
-            && transformY < g->ZBuffer[stripe])
-          {
-            while (y < drawEndX)
-            {
-              d = y * 256 - g->h * 128 + 64 * 128;
-              int sp_y = ((d * 64) / 64) /
-                256;
-              int color = 0x00FF0000;
-		          if (color != WALL_B)
-		            memcpy(g->imgpoke + 4 * WIDTH * sp_y + sp_x * 4,
-				          &color, sizeof(int));
-              y++;
-            }
-          }
-
-
-
-        stripe++;
-      }
-
-}
 
 void        floor_cast(t_game *g)
 {
@@ -145,10 +82,10 @@ void        floor_cast(t_game *g)
 
         g->floorTexX = (int)(g->currentFloorX * texWidth) & (texWidth - 1);
         g->floorTexY = (int)(g->currentFloorY * texHeight) & (texHeight - 1);
-
-		ft_memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
-				&g->tex_arr[6].data[g->floorTexY % texWidth * g->tex_arr[6].sizeline +
-				g->floorTexX % texWidth * g->tex_arr[6].bpp / 8], sizeof(int));
+        
+        ft_memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
+            &g->tex_arr[6].data[g->floorTexY % texWidth * g->tex_arr[6].sizeline +
+            g->floorTexX % texWidth * g->tex_arr[6].bpp / 8], sizeof(int));
         // int color = 0x0B2D4B;
 		// memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
 		// 		&color, sizeof(int));
@@ -202,12 +139,66 @@ void        sky_cast(t_game *g)
         g->floorTexX = (int)(g->currentFloorX * texWidth) & (texWidth - 1);
         g->floorTexY = (int)(g->currentFloorY * texHeight) & (texHeight - 1);
 
-		// ft_memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
-		// 		&g->tex_arr[1].data[g->floorTexY % texWidth * g->tex_arr[1].sizeline +
-		// 		g->floorTexX % texWidth * g->tex_arr[1].bpp / 8], sizeof(int));
-        int color = 0x0B2D4B;
-		memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
-				&color, sizeof(int));
+		ft_memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
+				&g->tex_arr[5].data[g->floorTexY % texWidth * g->tex_arr[5].sizeline +
+				g->floorTexX % texWidth * g->tex_arr[5].bpp / 8], sizeof(int));
+        // int color = 0x0B2D4B;
+		    // memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
+			  // 	&color, sizeof(int));
 
       }
 }
+
+
+// void      sprite_cast(t_game *g)
+// {
+//     g->sprite.y = 6.;
+//     g->sprite.x = 1.;
+//     double spriteX = g->sprite.x - g->posx;
+//     double spriteY = g->sprite.y - g->posy;
+//     double invDet = 1.0 / (g->planex * g->diry - g->dirx * g->planey);
+//     double transformX = invDet * (g->diry * spriteX - g->dirx * spriteY);
+//     double transformY = invDet * (-g->planey * spriteX + g->planex * spriteY); //this is actually the depth inside the screen, that what Z is in 3D
+
+//       int spriteScreenX = (int)((g->w / 2) * (1 + transformX / transformY));
+
+//       //calculate height of the sprite on screen
+//       int spriteHeight = abs((int)(g->h / (transformY))); //using 'transformY' instead of the real distance prevents fisheye
+//       //calculate lowest and highest pixel to fill in current stripe
+//       int drawStartY = -spriteHeight / 2 + g->h / 2;
+      
+//       if(drawStartY < 0) drawStartY = 0;
+//       int drawEndY = spriteHeight / 2 + g->h / 2;
+//       if(drawEndY >= g->h) drawEndY = g->h - 1;
+
+//       //calculate width of the sprite
+//       int spriteWidth = abs( (int) (g->h / (transformY)));
+//       int drawStartX = -spriteWidth / 2 + spriteScreenX;
+
+//       if(drawStartX < 0) drawStartX = 0;
+//       int drawEndX = spriteWidth / 2 + spriteScreenX;
+//       if(drawEndX >= g->w) drawEndX = g->w - 1;
+//       int stripe = drawStartX;
+//       while ( stripe < drawStartX)
+//       {
+//         int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+
+//         if(transformY > 0 && stripe > 0 && stripe < g->w && transformY < g->ZBuffer[stripe])
+//         {
+//           int y = drawStartY;
+//           while (y < drawEndY)
+//           {
+//             int d = (y) * 256 - g->h * 128 + spriteHeight * 128;
+//             int texY = ((d * texHeight) / spriteHeight) / 256;
+//             int color = 0x00FF00000;
+//             ft_memcpy(g->imgpoke + 4 * WIDTH * texY + texX * 4,
+//                 &color, sizeof(int));
+//             y++;
+//           }
+//         }
+
+
+//         stripe++;
+//       }
+
+// }

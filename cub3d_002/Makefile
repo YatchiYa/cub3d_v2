@@ -6,7 +6,8 @@ FLAGS = -Wall -Wextra -Werror
 
 FLAGS2 = -L minilibx -lmlx -framework OpenGL -framework AppKit
 
-SRC = srcs/main.c srcs/init.c srcs/move.c srcs/update.c srcs/raycast.c srcs/init_main.c srcs/textures.c srcs/color.c
+SRC = srcs/main.c srcs/init.c srcs/move.c srcs/update.c srcs/raycast.c srcs/init_main.c srcs/textures.c srcs/color.c \
+		srcs/sprite.c srcs/move_2.c
 
 OBJS = $(SRC:.c=.o)
 

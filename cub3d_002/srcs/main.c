@@ -3,9 +3,9 @@
 void			map(t_game *g)
 {
 	g->worldmap[0] = "1111111111";
-	g->worldmap[1] = "1000000001";
+	g->worldmap[1] = "100E000201";
 	g->worldmap[2] = "1000000001";
-	g->worldmap[3] = "1100000001";
+	g->worldmap[3] = "1100020001";
 	g->worldmap[4] = "1000110001";
 	g->worldmap[5] = "1000011001";
 	g->worldmap[6] = "1001001001";
@@ -14,9 +14,12 @@ void			map(t_game *g)
 	g->worldmap[9] = "1111111111";
 }
 
+
+
 int				close_win(t_game *g)
 {
 	mlx_destroy_window(g->mlx, g->win);
+	free(g);
 	exitit("Exiting");
 	return (0);
 }

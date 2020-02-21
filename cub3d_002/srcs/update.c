@@ -46,7 +46,10 @@ int		key_release(int key, t_game *g)
 	else if (key == 0)
 		g->lf_move = 0;
 	else if (key == 257)
+	{
 		g->speedup = 0;
+		g->movespeed = .07;
+	}
 	keyhooks(key, g);
 	return (0);
 }

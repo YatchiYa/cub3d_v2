@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
+/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
@@ -27,7 +39,7 @@ int	wall_direction(t_game *ray)
 int	wall_tex(t_game *ray)
 {
 	if (ray->side)
-		return ((ray->raydiry < 0) ? 1 : 2 );
+		return ((ray->raydiry < 0) ? 1 : 2);
 	return ((ray->raydirx < 0) ? 3 : 4);
 }
 
@@ -250,7 +262,16 @@ void	raycast_procjection(t_game *g)
 		raycast_dist(g);
 		raycat_object(g);
 		raycast_draw(g);
-		g->ZBuffer[g->x] = g->perpwalldist;
+		g->zbuffer[g->x] = g->perpwalldist;
 	}
-	sprite_cast(g);
+
+	t_raysprite	rs;
+	
+	rs.i = 0;
+	while (rs.i < 3)
+	{
+		ray_sprite(g, &rs);
+		draw_sprite(g, g, &rs);
+		rs.i++;
+	}
 }

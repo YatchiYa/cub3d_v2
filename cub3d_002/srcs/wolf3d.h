@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
+/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
@@ -29,6 +41,17 @@
 # define MAGENTA 0x00FF00FF
 # define YELLOW 0x00FFFF00
 # define CYAN 0x0000FFFF
+
+typedef struct		s_save
+{
+	int			fd;
+	int			size;
+	int			unused;
+	int			offset_begin;
+	int			header_bytes;
+	short int	plane;
+	short int	bpixel;
+}					t_save;
 
 typedef struct	s_image
 {
@@ -92,7 +115,8 @@ typedef struct		s_game
 	void			*win;
 	void			*img;
 	void			*healthbar;
-	void			*imgpoke;
+	char			*imgpoke;
+	// void			*imgpoke;
 	int				*imghealth;
 	int				sl;
 	int				end;
@@ -199,7 +223,6 @@ int					repeat(t_game *g);
 void				draw_background(t_game *g, int x);
 void    			draw_texture_wall(int x, t_game *t);
 void    			import_textures(t_game *g);
-int					wall_direction(t_game *ray);
 void				put_pxl_to_img(t_game *t, int x, int y, int color);
 void        		floor_cast(t_game *g);
 void        		sky_cast(t_game *g);
@@ -217,5 +240,17 @@ void				right_move(t_game *g);
 void				letf_move(t_game *g);
 void				speedmove(t_game *g);
 int					keyhooks(int key, t_game *g);
+int					ft_bitmap(t_game *s);
+void				*ft_memcpy(void *dst, const void *src, size_t n);
+int					wall_direction(t_game *ray);
+int					wall_tex(t_game *ray);
+void				draw_wallxx(int x, int start, int end, t_game *t);
+void				draw_sky_floor(int x, t_game *t);
+
+char				*replace(char *src, int start);
+int					find_sprite(t_game *g);
+void				set_direction(t_game *g, int direction);
+int					find_start_position(t_game *g);
+int     			ft_strlen(char *s);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
+/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void			map(t_game *g)
@@ -14,8 +26,6 @@ void			map(t_game *g)
 	g->worldmap[9] = "1111111111";
 }
 
-
-
 int				close_win(t_game *g)
 {
 	mlx_destroy_window(g->mlx, g->win);
@@ -24,11 +34,10 @@ int				close_win(t_game *g)
 	return (0);
 }
 
-
 int				main(int argc, char **argv)
 {
 	t_game	*g;
-	
+
 	if (!argc && !argv)
 		return (0);
 	if (!(g = (t_game *)malloc(sizeof(t_game))))

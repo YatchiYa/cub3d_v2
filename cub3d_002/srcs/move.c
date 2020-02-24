@@ -85,7 +85,7 @@ int		keyhooks(int key, t_game *g)
 {
 	(void)(g);
 	if (key == 53)
-		exitit("Exiting");
+		close_win(g);
 	else if (g->upkey == 1)
 		upmove(g);
 	else if (g->downkey == 1)

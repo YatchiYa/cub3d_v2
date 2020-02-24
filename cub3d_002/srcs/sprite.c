@@ -1,8 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
+/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "wolf3d.h"
-
-
 
 void	ray_sprite(t_game *e, t_raysprite *rs)
 {
@@ -46,15 +54,17 @@ void	draw_sprite(t_game *e, t_game *rc, t_raysprite *rs)
 			{
 				rs->d = (rs->y) * 256 - HEIGHT * 128 + rs->spriteheight * 128;
 				rs->texy = ((rs->d * 64) / rs->spriteheight) / 256;
-                if (e->tex_arr[7].data[rs->texy % texWidth * e->tex_arr[7].sizeline +
-                    rs->texx % texWidth * e->tex_arr[7].bpp / 8] != 0)
-                    ft_memcpy(e->imgpoke + 4 * WIDTH * rs->y + rs->stripe * 4,
-                        &e->tex_arr[7].data[rs->texy % texWidth * e->tex_arr[7].sizeline +
-                        rs->texx % texWidth * e->tex_arr[7].bpp / 8], sizeof(int));
+				if (e->tex_arr[7].data[rs->texy % texWidth *
+					e->tex_arr[7].sizeline +
+					rs->texx % texWidth * e->tex_arr[7].bpp / 8] != 0)
+					ft_memcpy(e->imgpoke + 4 * WIDTH * rs->y + rs->stripe * 4,
+						&e->tex_arr[7].data[rs->texy % texWidth *
+						e->tex_arr[7].sizeline +
+						rs->texx % texWidth * e->tex_arr[7].bpp / 8],
+						sizeof(int));
 				rs->y++;
 			}
 		}
 		rs->stripe++;
 	}
 }
-

@@ -37,11 +37,18 @@ int				close_win(t_game *g)
 int				main(int argc, char **argv)
 {
 	t_game	*g;
+	int		screen;
 
+	screen = 0;
+	if (argc >= 2 && ft_strcmp(argv[1], "--save") == 0)
+        screen = 1;
+	if (argc < (2 + screen))
+		exitit("Error:\nno map specified.\n");
 	if (!argc && !argv)
 		return (0);
 	if (!(g = (t_game *)malloc(sizeof(t_game))))
 		return (0);
 	map(g);
+	init_game(g);
 	makewindow(g);
 }

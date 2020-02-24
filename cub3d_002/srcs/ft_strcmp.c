@@ -6,31 +6,22 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*   Updated: 2020/02/24 18:27:41 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	redraw(t_game *g)
+int ft_strcmp(const char *s1, const char *s2)
 {
-	mlx_destroy_image(g->mlx, g->img);
-	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-	g->imgpoke = mlx_get_data_addr(g->img, &g->bpp, &(g->sl), &(g->end));
-	raycast_procjection(g);
-	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
-	player(g);
-}
+	int		i;
 
-void	makewindow(t_game *g)
-{
-	g->mlx = mlx_init();
-	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-	g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "cub3D");
-	g->imgpoke = mlx_get_data_addr(g->img, &g->bpp, &(g->sl), &(g->end));
-	raycast_procjection(g);
-	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
-	player(g);
-	mlx_loop_hook(g->mlx, repeat, g);
-	mlx_loop(g->mlx);
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

@@ -253,4 +253,6 @@ void				set_direction(t_game *g, int direction);
 int					find_start_position(t_game *g);
 int     			ft_strlen(char *s);
 
+int ft_strcmp(const char *s1, const char *s2);
+
 #endif

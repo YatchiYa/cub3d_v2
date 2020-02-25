@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
+# include <string.h>
+# include "../gnl/get_next_line.h"
 # include "../minilibx/mlx.h"
 
 # define HEIGHT 840
@@ -41,6 +43,12 @@
 # define MAGENTA 0x00FF00FF
 # define YELLOW 0x00FFFF00
 # define CYAN 0x0000FFFF
+
+typedef struct	s_str
+{
+	char			*content;
+	struct s_str	*next;
+}				t_str;
 
 typedef struct		s_save
 {
@@ -97,6 +105,8 @@ typedef struct		s_game
 {
 	t_image			tex_arr[9];
 	t_sprite		sprite[5];
+
+
 	void			*wall_tex;
 	int				tex_hit_id;
 	int				*data_wall_tex;
@@ -217,7 +227,7 @@ void				printcontrols(int i);
 void				errorcheck(char *str);
 int					key_press(int key, t_game *g);
 int					key_release(int key, t_game *g);
-void				makewindow(t_game *g);
+void				makewindow(t_game *g, int screen);
 void				redraw(t_game *g);
 int					repeat(t_game *g);
 void				draw_background(t_game *g, int x);
@@ -254,5 +264,19 @@ int					find_start_position(t_game *g);
 int     			ft_strlen(char *s);
 
 int ft_strcmp(const char *s1, const char *s2);
+int	ft_atoi(char const *str);
+int	ft_in_set(char c, char const *set);
+int	ft_endwith(char *str, char *end);
+
+int				str_length(t_str *str);
+t_str			*str_new(void *content);
+
+t_str			*str_add_back(t_str **str, char *content);
+
+t_str			*str_last(t_str *str);
+
+int				str_clear(t_str **list);
+char	**ft_split(char const *s, char c);
+
 
 #endif

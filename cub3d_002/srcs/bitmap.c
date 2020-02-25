@@ -22,7 +22,7 @@ void		ft_init_struct_save(t_game *storage, t_save *s)
 	s->bpixel = 32;
 	s->fd = open("img.bmp", O_RDWR | O_CREAT, S_IRWXU | O_TRUNC);
 	if (s->fd == -1)
-		close_win(storage);
+		exitit("Error :\n can't create screenshot.bmp \n check your valide space left device");
 }
 
 void		ft_write_texture_bmp_file(t_game *storage, int fd)

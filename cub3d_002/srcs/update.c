@@ -15,18 +15,20 @@
 void	redraw(t_game *g)
 {
 	mlx_destroy_image(g->mlx, g->img);
-	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+	g->img = mlx_new_image(g->mlx, g->w, g->h);
 	g->imgpoke = mlx_get_data_addr(g->img, &g->bpp, &(g->sl), &(g->end));
 	raycast_procjection(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 	player(g);
 }
 
-void	makewindow(t_game *g)
+void	makewindow(t_game *g, int screen)
 {
+	screen = 0;
 	g->mlx = mlx_init();
-	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
-	g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "cub3D");
+	init_game(g);
+	g->img = mlx_new_image(g->mlx, g->w, g->h);
+	g->win = mlx_new_window(g->mlx, g->w, g->h, "cub3D");
 	g->imgpoke = mlx_get_data_addr(g->img, &g->bpp, &(g->sl), &(g->end));
 	raycast_procjection(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);

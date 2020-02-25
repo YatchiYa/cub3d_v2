@@ -19,23 +19,27 @@ void		import_textures_2(t_game *g, int x, int y)
 							&g->tex_arr[4].bpp,
 							&g->tex_arr[4].sizeline,
 							&g->tex_arr[4].endian);
-	g->tex_arr[5].img = mlx_xpm_file_to_image(g->mlx, "xpm/redbrick.xpm",
-			&x, &y);
+	if (!(g->tex_arr[5].img = mlx_xpm_file_to_image(g->mlx, "xpm/redbrick.xpm",
+			&x, &y)))
+		exitit("Error :\n error texture wall");
 	g->tex_arr[5].data = mlx_get_data_addr(g->tex_arr[5].img,
 							&g->tex_arr[5].bpp,
 							&g->tex_arr[5].sizeline,
 							&g->tex_arr[5].endian);
-	g->tex_arr[6].img = mlx_xpm_file_to_image(g->mlx, "xpm/sand.xpm", &x, &y);
+	if (!(g->tex_arr[6].img = mlx_xpm_file_to_image(g->mlx, "xpm/sand.xpm", &x, &y)))
+		exitit("Error :\n error texture wall");
 	g->tex_arr[6].data = mlx_get_data_addr(g->tex_arr[6].img,
 							&g->tex_arr[6].bpp,
 							&g->tex_arr[6].sizeline,
 							&g->tex_arr[6].endian);
-	g->tex_arr[7].img = mlx_xpm_file_to_image(g->mlx, "xpm/barrel.xpm", &x, &y);
+	if (!(g->tex_arr[7].img = mlx_xpm_file_to_image(g->mlx, "xpm/barrel.xpm", &x, &y)))
+		exitit("Error :\n error texture wall");
 	g->tex_arr[7].data = mlx_get_data_addr(g->tex_arr[7].img,
 							&g->tex_arr[7].bpp,
 							&g->tex_arr[7].sizeline,
 							&g->tex_arr[7].endian);
-	g->tex_arr[8].img = mlx_xpm_file_to_image(g->mlx, "xpm/pillar.xpm", &x, &y);
+	if (!(g->tex_arr[8].img = mlx_xpm_file_to_image(g->mlx, "xpm/pillar.xpm", &x, &y)))
+		exitit("Error :\n error texture wall");
 	g->tex_arr[8].data = mlx_get_data_addr(g->tex_arr[8].img,
 							&g->tex_arr[8].bpp,
 							&g->tex_arr[8].sizeline,
@@ -47,24 +51,28 @@ void		import_textures(t_game *g)
 	int x;
 	int y;
 
-	g->tex_arr[1].img = mlx_xpm_file_to_image(g->mlx, "xpm/redbrick.xpm",
-			&x, &y);
+	if (!(g->tex_arr[1].img = mlx_xpm_file_to_image(g->mlx, "xpm/redbrick.xpm",
+			&x, &y)))
+		exitit("Error :\n error texture wall");
 	g->tex_arr[1].data = mlx_get_data_addr(g->tex_arr[1].img,
 							&g->tex_arr[1].bpp,
 							&g->tex_arr[1].sizeline,
 							&g->tex_arr[1].endian);
-	g->tex_arr[2].img = mlx_xpm_file_to_image(g->mlx, "xpm/grey.xpm", &x, &y);
+	if (!(g->tex_arr[2].img = mlx_xpm_file_to_image(g->mlx, "xpm/grey.xpm", &x, &y)))
+		exitit("Error :\n error texture wall");
 	g->tex_arr[2].data = mlx_get_data_addr(g->tex_arr[2].img,
 							&g->tex_arr[2].bpp,
 							&g->tex_arr[2].sizeline,
 							&g->tex_arr[2].endian);
-	g->tex_arr[3].img = mlx_xpm_file_to_image(g->mlx, "xpm/mossy.xpm", &x, &y);
+	if (!(g->tex_arr[3].img = mlx_xpm_file_to_image(g->mlx, "xpm/mossy.xpm", &x, &y)))
+		exitit("Error :\n error texture wall");
 	g->tex_arr[3].data = mlx_get_data_addr(g->tex_arr[3].img,
 							&g->tex_arr[3].bpp,
 							&g->tex_arr[3].sizeline,
 							&g->tex_arr[3].endian);
-	g->tex_arr[4].img = mlx_xpm_file_to_image(g->mlx, "xpm/bluestone.xpm",
-			&x, &y);
+	if (!(g->tex_arr[4].img = mlx_xpm_file_to_image(g->mlx, "xpm/bluestone.xpm",
+			&x, &y)))
+		exitit("Error :\n error texture wall");
 	import_textures_2(g, x, y);
 }
 
@@ -75,9 +83,9 @@ void		init_game_2(t_game *g)
 	if ((direction = find_start_position(g)) != 0)
 		set_direction(g, direction);
 	else
-		return ;
+		exitit("Error :\n no start position \n please specify : W/E/S/N in your map");
 	if (find_sprite(g) == 0)
-		return ;
+		exitit("Error :\n no sprite position \n please specify  at least one sprite : S");
 	import_textures(g);
 }
 

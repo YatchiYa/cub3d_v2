@@ -93,6 +93,28 @@ void		set_direction(t_game *g, int direction)
 	g->planey * cos(angle);
 }
 
+
+
+char		*replacex(char *src, int start)
+{
+	int			i;
+	char		*dest;
+
+	i = 0;
+	if (!(dest = malloc(sizeof(char) * (ft_strlen(src) + 1))))
+		return (NULL);
+	while (src[i])
+	{
+		if (i == start)
+			dest[i] = '0';
+		else
+			dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
 int			find_start_position(t_game *g)
 {
 	int	i;
@@ -107,12 +129,12 @@ int			find_start_position(t_game *g)
 		j = -1;
 		while (g->worldmap[i][++j] != '\0')
 			if (g->worldmap[i][j] == 'N' || g->worldmap[i][j] == 'S' ||
-			g->worldmap[i][j] == 'W' || g->worldmap[i][j] == 'E')
+				g->worldmap[i][j] == 'W' || g->worldmap[i][j] == 'E')
 			{
 				g->posx = i + 0.5;
 				g->posy = j + 0.5;
 				direction = (int)(g->worldmap[i][j]);
-				g->worldmap[i] = replace(g->worldmap[i], j);
+				g->worldmap[i] = replacex(g->worldmap[i], j);
 				nb++;
 			}
 		i++;

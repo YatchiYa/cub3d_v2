@@ -9,7 +9,6 @@
 /*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "wolf3d.h"
 
 void			map(t_game *g)
@@ -26,13 +25,16 @@ void			map(t_game *g)
 	g->worldmap[9] = "1111111111";
 }
 
+
+
 int				close_win(t_game *g)
 {
 	mlx_destroy_window(g->mlx, g->win);
-	free(g);
+	system("leaks cub3d");
 	exitit("Exiting");
 	return (0);
 }
+
 
 int				main(int argc, char **argv)
 {
@@ -42,13 +44,13 @@ int				main(int argc, char **argv)
 	screen = 0;
 	if (argc >= 2 && ft_strcmp(argv[1], "--save") == 0)
         screen = 1;
+	else
+		exitit("Error:\n not valide argument : please use : \n--save\n");
 	if (argc < (2 + screen))
 		exitit("Error:\nno map specified.\n");
-	if (!argc && !argv)
-		return (0);
 	if (!(g = (t_game *)malloc(sizeof(t_game))))
 		return (0);
 	map(g);
-	init_game(g);
-	makewindow(g);
+	makewindow(g, screen);
+	return (EXIT_SUCCESS);
 }

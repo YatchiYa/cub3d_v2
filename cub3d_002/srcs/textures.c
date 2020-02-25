@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <math.h>
-#include <string.h>
 
 void		floor_c(t_game *g)
 {
@@ -36,7 +34,7 @@ void		floor_c(t_game *g)
 			(texWidth - 1);
 		g->floorTexY = (int)(g->currentFloorY * texHeight) &
 			(texHeight - 1);
-		ft_memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
+		ft_memcpy(g->imgpoke + 4 * g->w * y + g->x * 4,
 				&g->tex_arr[6].data[g->floorTexY % texWidth *
 				g->tex_arr[6].sizeline +
 				g->floorTexX % texWidth * g->tex_arr[6].bpp / 8], sizeof(int));
@@ -66,7 +64,7 @@ void		sky_c(t_game *g, int color)
 			(texWidth - 1);
 		g->floorTexY = (int)(g->currentFloorY * texHeight) &
 			(texHeight - 1);
-		ft_memcpy(g->imgpoke + 4 * WIDTH * y + g->x * 4,
+		ft_memcpy(g->imgpoke + 4 * g->w * y + g->x * 4,
 				&color, sizeof(int));
 	}
 }

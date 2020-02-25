@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
+/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include "config_parse.h"
+#include "wolf3d.h"
 
-int parse_resolution(t_game_config *game_config, char *line)
+int parse_resolution(t_game *game_config, char *line)
 {
     int i;
     int j;
@@ -22,8 +33,8 @@ int parse_resolution(t_game_config *game_config, char *line)
         j++;
     }
     used[j] = '\0';
-    if(ft_atoi(used) > game_config->width)
-        game_config->width = ft_atoi(used);
+    if(ft_atoi(used) > game_config->w)
+        game_config->w = ft_atoi(used);
     free(used);
     used = (char*)malloc(sizeof(char) * 6);
     j = 0;
@@ -37,19 +48,13 @@ int parse_resolution(t_game_config *game_config, char *line)
         j++;
     }
     used[j] = '\0';
-    if(ft_atoi(used) > game_config->height)
-        game_config->height = ft_atoi(used);
+    if(ft_atoi(used) > game_config->h)
+        game_config->h = ft_atoi(used);
     free(used);
-    while (line[i] != '\0')
-    {
-        if (ft_isalphnum(line[i]) == 1)
-            return (0);
-        i++;
-    }
     return(1);
 }
 
-int parse_NOSOWEEA(t_game_config *game_config, char *line, char *mode)
+int parse_NOSOWEEA(t_game *game_config, char *line, char *mode)
 {
     int i;
     int j;
@@ -82,16 +87,10 @@ int parse_NOSOWEEA(t_game_config *game_config, char *line, char *mode)
     else if (ft_strcmp(mode, "S") == 0)
         game_config->S_texture = ft_strdup(used);
     free(used);
-    while (line[i] != '\0')
-    {
-        if (ft_isalphnum(line[i]) == 1)
-            return (0);
-        i++;
-    }
     return(1);
 }
 
-int fill_rgb_color(t_game_config *game_config, char *str, char mode)
+int fill_rgb_color(t_game *game_config, char *str, char mode)
 {
     int     i;
     char    **tab;
@@ -119,10 +118,17 @@ int fill_rgb_color(t_game_config *game_config, char *str, char mode)
         game_config->F_color = result;
     else if (mode == 'C')
         game_config->C_color = result;
+    i = 0;
+    while (tab[i])
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(result);
     return (1); 
 }
 
-int parse_FC_color(t_game_config *game_config, char *line, char mode)
+int parse_FC_color(t_game *game_config, char *line, char mode)
 {
     int i;
     int j;
@@ -145,11 +151,26 @@ int parse_FC_color(t_game_config *game_config, char *line, char mode)
     if (fill_rgb_color(game_config, used, mode) == 0)
         return (0);
     free(used);
-    while (line[i] != '\0')
+    return(1);
+}
+
+int     parse_map(char *line, t_str **map_buffer)
+{
+    int     i;
+    int     j;
+    char     *buffer;
+
+    i = 0;
+    j = 0;
+    buffer = (char*)malloc(sizeof(char) * (ft_strlen(line) + 1));
+    while (line[i] && line[i] != ' ')
     {
-        if (ft_isalphnum(line[i]) == 1)
-            return (0);
+        buffer[j] = line[i];
         i++;
+        j++;
     }
+    buffer[j] = '\0';
+    str_add_back(map_buffer, ft_strdup(buffer));
+    free(buffer);
     return(1);
 }

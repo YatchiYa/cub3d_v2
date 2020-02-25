@@ -29,8 +29,10 @@ int		repeat(t_game *g)
 	return (0);
 }
 
-void	exitit(char *str)
+void	exitit(char *str, t_game *g)
 {
+	mlx_destroy_window(g->mlx, g->win);
 	printf("%s\n", str);
+	system("leaks cub3d");
 	exit(0);
 }

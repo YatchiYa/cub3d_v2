@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define BUFFER_SIZE 42
 
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -24,5 +25,6 @@ int		get_next_line(int fd, char **line);
 int		ft_line_break(char *stock);
 int		ft_read_file(char **stock, int fd);
 void	ft_fill_static(char **stock, char *buff);
+size_t			ft_strlenx(const char *s);
 
 #endif

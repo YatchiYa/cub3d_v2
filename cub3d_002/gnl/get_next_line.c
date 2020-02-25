@@ -63,9 +63,9 @@ int		get_next_line(int fd, char **line)
 	while (stock[fd][i] != '\n' && stock[fd][i])
 		i++;
 	*line = ft_substr(stock[fd], 0, i);
-	if ((ret == 0 && ft_strlen(stock[fd]) > ft_strlen(*line)) || ret > 0)
+	if ((ret == 0 && ft_strlenx(stock[fd]) > ft_strlenx(*line)) || ret > 0)
 		ret = 1;
-	ft_fill_static(&stock[fd], ft_substr(stock[fd], ++i, ft_strlen(stock[fd])));
+	ft_fill_static(&stock[fd], ft_substr(stock[fd], ++i, ft_strlenx(stock[fd])));
 	if (ret <= 0)
 	{
 		free(stock[fd]);

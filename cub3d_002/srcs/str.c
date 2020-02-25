@@ -26,16 +26,15 @@ int
 	return (i);
 }
 
-t_str
-	*str_add_back(t_str **str, char *content)
+void	str_add_back(t_str **str, char *content)
 {
 	t_str	*first;
 	t_str	*new;
 
 	if (!content)
-		return (NULL);
+		return ;
 	if (!(new = (t_str*)malloc(sizeof(*new))))
-		return (0);
+		return ;
 	new->content = content;
 	new->next = NULL;
 	if (!*str)
@@ -48,7 +47,6 @@ t_str
 		(*str)->next = new;
 		*str = first;
 	}
-	return (new);
 }
 
 t_str
@@ -74,15 +72,4 @@ int
 		(*list) = tmp;
 	}
 	return (0);
-}
-
-t_str	*str_new(void *content)
-{
-	t_str	*new;
-
-	if (!(new = malloc(sizeof(t_str))))
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
 }

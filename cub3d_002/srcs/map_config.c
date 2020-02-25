@@ -52,8 +52,8 @@ int			find_sprite(t_game *g)
 	nb = 0;
 	while (i < 10)
 	{
-		j = -1;
-		while (g->worldmap[i][++j] != '\0')
+		j = 0;
+		while (g->worldmap[i][j] != '\0')
 		{
 			if (g->worldmap[i][j] == '2' || g->worldmap[i][j] == '3')
 			{
@@ -63,6 +63,7 @@ int			find_sprite(t_game *g)
 				g->worldmap[i] = replace(g->worldmap[i], j);
 				nb++;
 			}
+			j++;
 		}
 		i++;
 	}
@@ -126,8 +127,9 @@ int			find_start_position(t_game *g)
 	nb = 0;
 	while (i < 10)
 	{
-		j = -1;
-		while (g->worldmap[i][++j] != '\0')
+		j = 0;
+		while (g->worldmap[i][j] != '\0')
+		{
 			if (g->worldmap[i][j] == 'N' || g->worldmap[i][j] == 'S' ||
 				g->worldmap[i][j] == 'W' || g->worldmap[i][j] == 'E')
 			{
@@ -137,6 +139,8 @@ int			find_start_position(t_game *g)
 				g->worldmap[i] = replacex(g->worldmap[i], j);
 				nb++;
 			}
+			j++;
+		}
 		i++;
 	}
 	if (nb > 1 || nb == 0)

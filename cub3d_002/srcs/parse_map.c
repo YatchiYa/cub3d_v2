@@ -1,6 +1,6 @@
 
 
-# include "parse_map.h"
+# include "wolf3d.h"
 
 int
 	count_check_columns(char const *line)
@@ -70,7 +70,7 @@ int
 }
 
 int
-	check_valid(t_game_config *config, t_str *map_buffer)
+	check_valid(t_game *config, t_str *map_buffer)
 {
 	int	i;
 	int	col;
@@ -94,7 +94,7 @@ int
 }
 
 int
-	copy_map(t_game_config *config, t_str *map_buffer, int *map)
+	copy_map(t_game *config, t_str *map_buffer, int *map)
 {
 	int		i;
 	int		j;
@@ -122,48 +122,24 @@ int
 	return (has_camera);
 }
 
-int ft_check_map(t_game_config *game_config, t_str *map_buffer)
+int ft_check_map(t_game *game, t_str *map_buffer)
 {
-    int *map;
+	int		i;
 
-    map = NULL;
-    if ((game_config->columns = check_top_bottom_borders(map_buffer)) <= 2
-        || (game_config->rows = check_left_right_borders(map_buffer)) <= 2
-        || check_valid(game_config, map_buffer) == 0)
+	i = 0;
+    if ((game->columns = check_top_bottom_borders(map_buffer)) <= 2
+        || (game->rows = check_left_right_borders(map_buffer)) <= 2
+        || check_valid(game, map_buffer) == 0)
         return (0);
-    if (!(map = (int*)malloc(sizeof(*map) * (game_config->columns * game_config->rows))))
+    if (!(game->wd = (char**)malloc(sizeof(char*) * (game->rows))))
         return(0);
-	if (copy_map(game_config, map_buffer, map) != 1)
-		return (0);
-	game_config->maps = map;
+	while(i < game->rows)
+	{
+		if (!(game->wd[i] = (char*)malloc(sizeof(char) * (game->columns))))
+			return (0);
+		game->wd[i] = ft_strdup(map_buffer->content);
+		map_buffer = map_buffer->next;
+		i++;
+	}
 	return (1);
-}
-
-
-int     parse_map(t_game_config *game_config, char *line, t_str **map_buffer, t_str *first_elem)
-{
-    int     i;
-    int     j;
-    char     *buffer;
-    t_str   *new_str;
-
-    i = 0;
-    j = 0;
-    buffer = (char*)malloc(sizeof(char) * (ft_strlen(line) + 1));
-    while (line[i] && line[i] != ' ')
-    {
-        buffer[j] = line[i];
-        i++;
-        j++;
-    }
-    buffer[j] = '\0';
-    new_str = str_add_back(map_buffer, ft_strdup(buffer));
-    free(buffer);
-    while (line[i] != '\0')
-    {
-        if (ft_isalphnum(line[i]) == 1)
-            return (0);
-        i++;
-    }
-    return(1);
 }

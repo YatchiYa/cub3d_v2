@@ -43,6 +43,8 @@
 # define MAGENTA 0x00FF00FF
 # define YELLOW 0x00FFFF00
 # define CYAN 0x0000FFFF
+# define DIRECTIONS "NSEW"
+# define VALID_MAP_CHARACTERS " 01234NSEW"
 
 typedef struct	s_str
 {
@@ -211,11 +213,25 @@ typedef struct		s_game
 	int				floorTexY;
 	double			*zbuffer;
 	unsigned char	chan[3];
+	
+    char    *NO_texture;
+    char    *SO_texture;
+    char    *WE_texture;
+    char    *EA_texture;
+    char    *ST_texture;
+    char    *FT_texture;
+    char    *S_texture;
+    int     *F_color;
+    int     *C_color;
+	int		screen;
+	int		columns;
+	int		rows;
+	char			**wd;
 
 }					t_game;
 
 void				map(t_game *g);
-void				exitit(char	*str);
+void	exitit(char *str, t_game *g);
 int					close_win(t_game *g);
 unsigned int		pick_color(int i, double x, double y);
 void				draw_wall(t_game *g, int x);
@@ -227,7 +243,7 @@ void				printcontrols(int i);
 void				errorcheck(char *str);
 int					key_press(int key, t_game *g);
 int					key_release(int key, t_game *g);
-void				makewindow(t_game *g, int screen);
+void				makewindow(t_game *g, int screen, char *path);
 void				redraw(t_game *g);
 int					repeat(t_game *g);
 void				draw_background(t_game *g, int x);
@@ -269,14 +285,24 @@ int	ft_in_set(char c, char const *set);
 int	ft_endwith(char *str, char *end);
 
 int				str_length(t_str *str);
-t_str			*str_new(void *content);
 
-t_str			*str_add_back(t_str **str, char *content);
+void			str_add_back(t_str **str, char *content);
 
 t_str			*str_last(t_str *str);
 
 int				str_clear(t_str **list);
 char	**ft_split(char const *s, char c);
+int 	parse_game_config(t_game *game, char *path);
+int parse_resolution(t_game *game_config, char *line);
+int parse_NOSOWEEA(t_game *game_config, char *line, char *mode);
+int fill_rgb_color(t_game *game_config, char *str, char mode);
+int parse_FC_color(t_game *game_config, char *line, char mode);
+int     parse_map(char *line, t_str **map_buffer);
 
+void
+	*ft_memmove(void *dst, const void *src, unsigned long len);
+int ft_isalphnum(char c);
+int ft_isnum(char c);
+int ft_check_map(t_game *game_config, t_str *map_buffer);
 
 #endif

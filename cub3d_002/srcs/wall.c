@@ -16,7 +16,7 @@ void			draw_wallxx(int x, int start, int end, t_game *t)
 {
 	if (t->texture == 1)
 	{
-		t->id = t->worldmap[t->mapx][t->mapy];
+		t->id = t->wd[t->mapx][t->mapy];
 		if (t->side == 0)
 			t->x_wall = t->rayposy + t->perpwalldist * t->raydiry;
 		else
@@ -41,20 +41,24 @@ void			draw_sky_floor(int x, t_game *t)
 		if (t->drawstart > 0)
 		{
 			t->y = -1;
-			if (x < WIDTH && t->y < HEIGHT)
+			if (x < t->w && t->y < t->h)
 				while (++t->y < t->drawstart)
 				{
-					t->color = 0x66CCFF;
+					t->color = t->C_color[0];
+					t->color = (t->color << 8) + t->C_color[1];
+					t->color = (t->color << 8) + t->C_color[2];
 					put_pxl_to_img(t, x, t->y, t->color);
 				}
 		}
 		if (t->drawend > 0)
 		{
 			t->y = t->drawend - 1;
-			if (x < WIDTH && t->y < HEIGHT)
-				while (++t->y < HEIGHT)
+			if (x < t->w && t->y < t->h)
+				while (++t->y < t->h)
 				{
-					t->color = 0x06FF00;
+					t->color = t->F_color[0];
+					t->color = (t->color << 8) + t->F_color[1];
+					t->color = (t->color << 8) + t->F_color[2];
 					put_pxl_to_img(t, x, t->y, t->color);
 				}
 		}

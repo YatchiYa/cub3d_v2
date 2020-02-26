@@ -25,7 +25,6 @@
 # define HEIGHT 840
 # define WIDTH 1280
 # define MAPH 10
-# define MAPW 10
 # define texWidth 64
 # define texHeight 64
 # define WALL_T 0x0D3558
@@ -122,7 +121,8 @@ typedef struct		s_game
 	int				x_text;
 	int				y_text;
 	double			x_wall;
-	char			*worldmap[MAPH];
+	char				*worldmap[MAPH];
+	// char			**worldmap;
 	void			*mlx;
 	void			*win;
 	void			*img;
@@ -226,14 +226,12 @@ typedef struct		s_game
 	int		screen;
 	int		columns;
 	int		rows;
-	char			**wd;
+	int			**wd;
 
 }					t_game;
 
-void				map(t_game *g);
 void	exitit(char *str, t_game *g);
 int					close_win(t_game *g);
-unsigned int		pick_color(int i, double x, double y);
 void				draw_wall(t_game *g, int x);
 void				player(t_game *g);
 void				wall_color(t_game *g);
@@ -299,10 +297,9 @@ int fill_rgb_color(t_game *game_config, char *str, char mode);
 int parse_FC_color(t_game *game_config, char *line, char mode);
 int     parse_map(char *line, t_str **map_buffer);
 
-void
-	*ft_memmove(void *dst, const void *src, unsigned long len);
 int ft_isalphnum(char c);
 int ft_isnum(char c);
 int ft_check_map(t_game *game_config, t_str *map_buffer);
+void		init_game_2(t_game *g);
 
 #endif

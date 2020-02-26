@@ -28,9 +28,9 @@ void	makewindow(t_game *g, int screen, char *path)
 	g->mlx = mlx_init();
 	g->screen = screen;
 	init_game(g);
-	printf(" \n debug %s \n", path);
 	if (parse_game_config(g, path) == 0)
 		exitit("error while parsing the file", g);
+	init_game_2(g);
 	g->img = mlx_new_image(g->mlx, g->w, g->h);
 	g->win = mlx_new_window(g->mlx, g->w, g->h, "cub3D");
 	g->imgpoke = mlx_get_data_addr(g->img, &g->bpp, &(g->sl), &(g->end));

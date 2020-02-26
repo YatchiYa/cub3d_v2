@@ -20,7 +20,8 @@ int parse_resolution(t_game *game_config, char *line)
     
     i = 0;
     j = 0;
-    used = (char*)malloc(sizeof(char) * 6);
+    if (!(used = (char*)malloc(sizeof(char) * 6)))
+        return (0);
     // for width
     while (line[i] == 'R' || line[i] == ' ')
         i++;
@@ -33,8 +34,8 @@ int parse_resolution(t_game *game_config, char *line)
         j++;
     }
     used[j] = '\0';
-    if(ft_atoi(used) > game_config->w)
-        game_config->w = ft_atoi(used);
+    // if(ft_atoi(used) > game_config->w)
+    game_config->w = ft_atoi(used);
     free(used);
     used = (char*)malloc(sizeof(char) * 6);
     j = 0;
@@ -48,8 +49,8 @@ int parse_resolution(t_game *game_config, char *line)
         j++;
     }
     used[j] = '\0';
-    if(ft_atoi(used) > game_config->h)
-        game_config->h = ft_atoi(used);
+    // if(ft_atoi(used) > game_config->h)
+    game_config->h = ft_atoi(used);
     free(used);
     return(1);
 }
@@ -97,7 +98,8 @@ int fill_rgb_color(t_game *game_config, char *str, char mode)
     int     *result;
 
     i = 0;
-    result = (int*)malloc(sizeof(int) * 3);
+    if (!(result = (int*)malloc(sizeof(int) * 3)))
+        return (0);
     while (str[i])
     {
         if (ft_isnum(str[i]) == 1 || str[i] == ',')
@@ -124,7 +126,6 @@ int fill_rgb_color(t_game *game_config, char *str, char mode)
         free(tab[i]);
         i++;
     }
-    free(result);
     return (1); 
 }
 
@@ -149,7 +150,10 @@ int parse_FC_color(t_game *game_config, char *line, char mode)
     }
     used[j] = '\0';
     if (fill_rgb_color(game_config, used, mode) == 0)
+    {
+        free(used);
         return (0);
+    }
     free(used);
     return(1);
 }

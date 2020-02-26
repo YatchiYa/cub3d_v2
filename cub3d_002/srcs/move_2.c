@@ -21,7 +21,7 @@ void	right_move(t_game *g)
 	y = (int)(g->posy - g->dirx * g->movespeed);
 	if (g->rk_move == 1)
 	{
-		if (g->worldmap[x][y] == '0')
+		if (g->wd[x][y] == 0)
 		{
 			g->posy -= g->dirx * g->movespeed;
 			g->posx += g->diry * g->movespeed;
@@ -39,7 +39,7 @@ void	letf_move(t_game *g)
 	y = (int)(g->posy + g->dirx * g->movespeed);
 	if (g->lf_move == 1)
 	{
-		if (g->worldmap[x][y] == '0')
+		if (g->wd[x][y] == 0)
 		{
 			g->posy += g->dirx * g->movespeed;
 			g->posx -= g->diry * g->movespeed;

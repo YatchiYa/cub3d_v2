@@ -67,15 +67,9 @@ int 	parse_game_config(t_game *game, char *path)
         str_add_back(&map_buffer, ft_strdup(line));
     game->columns = ft_strlen(line);
     game->rows = str_length(map_buffer);
-	// if (ft_check_map(game, map_buffer) == 0)
-    //     exitit(" error map format ", game);
-	// free(line);
-    // int i = 0;
-    // while (i < game->rows)
-    // {
-    //     printf("\n debug %s \n",game->wd[i]);
-    //     i++;
-    // }
+	if (ft_check_map(game, map_buffer) == 0)
+        exitit(" error map format ", game);
+	free(line);
 	close(fd);
 	return (1);
 }

@@ -22,26 +22,6 @@ int			ft_strlen(char *s)
 	return (i);
 }
 
-char		*replace(char *src, int start)
-{
-	int			i;
-	char		*dest;
-
-	i = 0;
-	if (!(dest = malloc(sizeof(char) * (ft_strlen(src) + 1))))
-		return (NULL);
-	while (src[i])
-	{
-		if (i == start)
-			dest[i] = '0';
-		else
-			dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 int			find_sprite(t_game *g)
 {
 	int	i;
@@ -50,17 +30,17 @@ int			find_sprite(t_game *g)
 
 	i = 0;
 	nb = 0;
-	while (i < 10)
+	while (i < g->rows)
 	{
 		j = 0;
-		while (g->worldmap[i][j] != '\0')
+		while (j < g->columns)
 		{
-			if (g->worldmap[i][j] == '2' || g->worldmap[i][j] == '3')
+			if (g->wd[i][j] == 2 || g->wd[i][j] == 3)
 			{
-				g->sprite[nb] = g->worldmap[i][j] == '2' ?
+				g->sprite[nb] = g->wd[i][j] == 2 ?
 					(t_sprite){i + 0.5, j + 0.5, 7} :
 					(t_sprite){i + 0.5, j + 0.5, 8};
-				g->worldmap[i] = replace(g->worldmap[i], j);
+				g->wd[i][j] = 0;
 				nb++;
 			}
 			j++;
@@ -76,11 +56,11 @@ void		set_direction(t_game *g, int direction)
 {
 	double	angle;
 
-	if (direction == 83)
+	if (direction == 83 - 48)
 		angle = 135;
-	else if (direction == 69)
+	else if (direction == 69 - 48)
 		angle = 67.5;
-	else if (direction == 87)
+	else if (direction == 87 - 48)
 		angle = -67.5;
 	else
 		angle = 0;
@@ -94,28 +74,6 @@ void		set_direction(t_game *g, int direction)
 	g->planey * cos(angle);
 }
 
-
-
-char		*replacex(char *src, int start)
-{
-	int			i;
-	char		*dest;
-
-	i = 0;
-	if (!(dest = malloc(sizeof(char) * (ft_strlen(src) + 1))))
-		return (NULL);
-	while (src[i])
-	{
-		if (i == start)
-			dest[i] = '0';
-		else
-			dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 int			find_start_position(t_game *g)
 {
 	int	i;
@@ -125,18 +83,18 @@ int			find_start_position(t_game *g)
 
 	i = 0;
 	nb = 0;
-	while (i < 10)
+	while (i < g->rows)
 	{
 		j = 0;
-		while (g->worldmap[i][j] != '\0')
+		while (j < g->columns)
 		{
-			if (g->worldmap[i][j] == 'N' || g->worldmap[i][j] == 'S' ||
-				g->worldmap[i][j] == 'W' || g->worldmap[i][j] == 'E')
+			if (g->wd[i][j] == 78 - 48 || g->wd[i][j] == 83 - 48 ||
+				g->wd[i][j] == 87 - 48 || g->wd[i][j] == 69 - 48)
 			{
 				g->posx = i + 0.5;
 				g->posy = j + 0.5;
-				direction = (int)(g->worldmap[i][j]);
-				g->worldmap[i] = replacex(g->worldmap[i], j);
+				direction = (int)(g->wd[i][j]);
+				g->wd[i][j] = 0;
 				nb++;
 			}
 			j++;

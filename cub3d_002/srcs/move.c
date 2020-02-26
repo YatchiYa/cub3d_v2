@@ -22,7 +22,7 @@ void	upmove(t_game *g)
 	y = (int)(g->posy + g->diry * g->movespeed);
 	if (g->upkey == 1 && g->downkey == 0)
 	{
-		if (g->worldmap[x][y] == '0')
+		if (g->wd[x][y] == 0)
 		{
 			g->posx += g->dirx * g->movespeed;
 			g->posy += g->diry * g->movespeed;
@@ -40,7 +40,7 @@ void	downmove(t_game *g)
 	y = (int)(g->posy - g->diry * g->movespeed);
 	if (g->downkey == 1 & g->upkey == 0)
 	{
-		if (g->worldmap[x][y] == '0')
+		if (g->wd[x][y] == 0)
 		{
 			g->posx -= g->dirx * g->movespeed;
 			g->posy -= g->diry * g->movespeed;
@@ -86,17 +86,17 @@ int		keyhooks(int key, t_game *g)
 	(void)(g);
 	if (key == 53)
 		close_win(g);
-	else if (g->upkey == 1)
+	if (g->upkey == 1)
 		upmove(g);
-	else if (g->downkey == 1)
+	if (g->downkey == 1)
 		downmove(g);
-	else if (g->leftkey == 1)
+	if (g->leftkey == 1)
 		leftmove(g);
-	else if (g->rightkey == 1)
+	if (g->rightkey == 1)
 		rightmove(g);
-	else if (g->rk_move == 1)
+	if (g->rk_move == 1)
 		right_move(g);
-	else if (g->lf_move == 1)
+	if (g->lf_move == 1)
 		letf_move(g);
 	if (g->speedup == 1 && (g->upkey == 1 || g->downkey == 1))
 		speedmove(g);

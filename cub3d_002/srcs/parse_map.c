@@ -65,7 +65,11 @@ int
 	else
 		last_line = 0;
 	if (first_line == last_line)
+	{
+		free(last);
 		return (first_line);
+	}
+	free(last);
 	return (0);
 }
 
@@ -93,33 +97,16 @@ int
 	return (1);
 }
 
-int
-	copy_map(t_game *config, t_str *map_buffer, int *map)
+void	ft_fill_tab(int *tab, t_str *map_buffer)
 {
-	int		i;
-	int		j;
-	int		line;
-	int		has_camera;
+	int i = 0;
 
-	i = 0;
-	has_camera = 0;
-	while (map_buffer)
+	while (map_buffer->content[i] != '\0')
 	{
-		j = 0;
-		line = 0;
-		while (map_buffer->content[j])
-		{
-			while (map_buffer->content[j] == ' ')
-				j++;
-			map[(i * config->columns) + line++] = map_buffer->content[j];
-			if (ft_in_set(map_buffer->content[j], DIRECTIONS))
-				has_camera++;
-			j++;
-		}
-		map_buffer = map_buffer->next;
+		tab[i] = map_buffer->content[i] - 48;
 		i++;
 	}
-	return (has_camera);
+	
 }
 
 int ft_check_map(t_game *game, t_str *map_buffer)
@@ -131,15 +118,27 @@ int ft_check_map(t_game *game, t_str *map_buffer)
         || (game->rows = check_left_right_borders(map_buffer)) <= 2
         || check_valid(game, map_buffer) == 0)
         return (0);
-    if (!(game->wd = (char**)malloc(sizeof(char*) * (game->rows))))
+    if (!(game->wd = (int**)malloc(sizeof(int*) * (game->rows))))
         return(0);
 	while(i < game->rows)
 	{
-		if (!(game->wd[i] = (char*)malloc(sizeof(char) * (game->columns))))
+		if (!(game->wd[i] = (int*)malloc(sizeof(int) * (game->columns))))
 			return (0);
-		game->wd[i] = ft_strdup(map_buffer->content);
+		ft_fill_tab(game->wd[i], map_buffer);
 		map_buffer = map_buffer->next;
 		i++;
 	}
+	i = 0;
+	while (i < game->rows)
+	{
+		int j = 0;
+		while (j < game->columns)
+		{
+			printf("-> {%d, %d} ->[%d] \n", i, j, game->wd[i][j]);
+			j++;
+		}
+		i++;
+	}
+	
 	return (1);
 }

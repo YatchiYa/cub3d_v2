@@ -52,7 +52,7 @@ void	draw_sprite(t_game *e, t_game *rc, t_raysprite *rs)
 			rs->y = rs->drawstarty;
 			while (rs->y < rs->drawendy)
 			{
-				rs->d = (rs->y) * 256 - HEIGHT * 128 + rs->spriteheight * 128;
+				rs->d = (rs->y) * 256 - e->h * 128 + rs->spriteheight * 128;
 				rs->texy = ((rs->d * 64) / rs->spriteheight) / 256;
 				if (e->tex_arr[7].data[rs->texy % texWidth *
 					e->tex_arr[7].sizeline +

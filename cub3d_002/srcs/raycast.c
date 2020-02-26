@@ -68,7 +68,7 @@ void	raycat_object(t_game *g)
 			g->mapy += g->stepy;
 			g->side = 1;
 		}
-		if (g->worldmap[g->mapx][g->mapy] != '0')
+		if (g->wd[g->mapx][g->mapy] > 0)
 			g->hit = 1;
 	}
 	if (g->side == 0)

@@ -65,11 +65,7 @@ int
 	else
 		last_line = 0;
 	if (first_line == last_line)
-	{
-		free(last);
 		return (first_line);
-	}
-	free(last);
 	return (0);
 }
 
@@ -128,17 +124,5 @@ int ft_check_map(t_game *game, t_str *map_buffer)
 		map_buffer = map_buffer->next;
 		i++;
 	}
-	i = 0;
-	while (i < game->rows)
-	{
-		int j = 0;
-		while (j < game->columns)
-		{
-			printf("-> {%d, %d} ->[%d] \n", i, j, game->wd[i][j]);
-			j++;
-		}
-		i++;
-	}
-	
 	return (1);
 }

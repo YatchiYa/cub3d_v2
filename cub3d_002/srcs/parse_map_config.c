@@ -39,7 +39,7 @@ int		ft_parse_line(t_game *game_config, char *line, t_str **map_buffer)
 	else if (line[0] == ' ' || line[0] == '\n' || line[0] == '\0')
 		return (1);
 	else
-		return (0);
+		return (1);
 }
 
 int 	parse_game_config(t_game *game, char *path)

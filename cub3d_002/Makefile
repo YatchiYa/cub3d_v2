@@ -11,7 +11,7 @@ SRC = srcs/main.c srcs/init.c srcs/move.c srcs/update.c srcs/raycast.c srcs/init
 		srcs/map_config.c srcs/hooks.c srcs/ft_strcmp.c \
 		srcs/ft_atoi.c srcs/ft_endwith.c srcs/ft_in_set.c srcs/str.c \
 		srcs/ft_split.c srcs/parse_map_config.c srcs/parse_elem.c srcs/ft_memmove.c srcs/ft_strdup.c \
-		gnl/get_next_line.c gnl/get_next_line_utils.c srcs/parse_map.c
+		gnl/get_next_line.c gnl/get_next_line_utils.c srcs/parse_map.c srcs/close.c
 
 OBJS = $(SRC:.c=.o)
 

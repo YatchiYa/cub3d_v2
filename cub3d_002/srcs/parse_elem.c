@@ -126,6 +126,7 @@ int fill_rgb_color(t_game *game_config, char *str, char mode)
         free(tab[i]);
         i++;
     }
+    free(tab);
     return (1); 
 }
 

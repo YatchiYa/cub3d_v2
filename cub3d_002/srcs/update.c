@@ -24,7 +24,6 @@ void	redraw(t_game *g)
 
 void	makewindow(t_game *g, int screen, char *path)
 {
-	screen = 0;
 	g->mlx = mlx_init();
 	g->screen = screen;
 	init_game(g);
@@ -37,6 +36,8 @@ void	makewindow(t_game *g, int screen, char *path)
 	raycast_procjection(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 	player(g);
+	if (screen == 1)
+		ft_bitmap(g);
 	mlx_loop_hook(g->mlx, repeat, g);
 	mlx_loop(g->mlx);
 }

@@ -28,12 +28,3 @@ int		repeat(t_game *g)
 	mlx_hook(g->win, 17, 0, close_win, g);
 	return (0);
 }
-
-void	exitit(char *str, t_game *g)
-{
-	if (g)
-		;
-	printf("%s\n", str);
-	system("leaks cub3d");
-	exit(1);
-}

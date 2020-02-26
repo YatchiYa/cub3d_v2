@@ -12,14 +12,6 @@
 
 #include "wolf3d.h"
 
-int				close_win(t_game *g)
-{
-	mlx_destroy_window(g->mlx, g->win);
-	system("leaks cub3d");
-	exitit("Exiting", g);
-	return (0);
-}
-
 int				main(int argc, char **argv)
 {
 	t_game	*g;

@@ -35,5 +35,6 @@ void	exitit(char *str, t_game *g)
 	if (g)
 		;
 	ft_putstr(str);
+	system("leaks cub3d");
 	exit(1);
 }

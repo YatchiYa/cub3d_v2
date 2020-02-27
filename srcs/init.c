@@ -79,7 +79,7 @@ void		import_textures(t_game *g)
 void		init_game_2(t_game *g)
 {
 	int direction;
-
+	
 	if ((direction = find_start_position(g)) != 0)
 		set_direction(g, direction);
 	else

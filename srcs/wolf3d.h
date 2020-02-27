@@ -105,9 +105,8 @@ typedef struct	s_raysprite
 typedef struct		s_game
 {
 	t_image			tex_arr[9];
+	char			*worldmap[MAPH];
 	t_sprite		sprite[5];
-
-
 	void			*wall_tex;
 	int				tex_hit_id;
 	int				*data_wall_tex;
@@ -121,14 +120,11 @@ typedef struct		s_game
 	int				x_text;
 	int				y_text;
 	double			x_wall;
-	char				*worldmap[MAPH];
-	// char			**worldmap;
 	void			*mlx;
 	void			*win;
 	void			*img;
 	void			*healthbar;
 	char			*imgpoke;
-	// void			*imgpoke;
 	int				*imghealth;
 	int				sl;
 	int				end;
@@ -212,7 +208,6 @@ typedef struct		s_game
 	int				floorTexX;
 	int				floorTexY;
 	double			*zbuffer;
-	unsigned char	chan[3];
 	
     char    *NO_texture;
     char    *SO_texture;
@@ -223,7 +218,6 @@ typedef struct		s_game
     char    *S_texture;
     int     *F_color;
     int     *C_color;
-	int		screen;
 	int		columns;
 	int		rows;
 	int			**wd;
@@ -301,5 +295,6 @@ int ft_isalphnum(char c);
 int ft_isnum(char c);
 int ft_check_map(t_game *game_config, t_str *map_buffer);
 void		init_game_2(t_game *g);
+int		ft_parse_line(t_game *game_config, char *line, t_str **map_buffer);
 
 #endif

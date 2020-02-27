@@ -1,9 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/27 16:44:28 by yarab             #+#    #+#             */
+/*   Updated: 2020/02/27 16:46:56 by yarab            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "wolf3d.h"
 
-# include "wolf3d.h"
-
-int
-	count_check_columns(char const *line)
+int		count_check_columns(char const *line)
 {
 	int	i;
 	int	j;
@@ -21,8 +30,7 @@ int
 	return (j);
 }
 
-int
-	check_left_right_borders(t_str *map_buffer)
+int		check_left_right_borders(t_str *map_buffer)
 {
 	int				i;
 	int				first;
@@ -49,8 +57,7 @@ int
 	return (i);
 }
 
-int
-	check_top_bottom_borders(t_str *map_buffer)
+int		check_top_bottom_borders(t_str *map_buffer)
 {
 	int		first_line;
 	int		last_line;
@@ -69,8 +76,7 @@ int
 	return (0);
 }
 
-int
-	check_valid(t_game *config, t_str *map_buffer)
+int		check_valid(t_game *config, t_str *map_buffer)
 {
 	int	i;
 	int	col;
@@ -93,30 +99,18 @@ int
 	return (1);
 }
 
-void	ft_fill_tab(int *tab, t_str *map_buffer)
-{
-	int i = 0;
-
-	while (map_buffer->content[i] != '\0')
-	{
-		tab[i] = map_buffer->content[i] - 48;
-		i++;
-	}
-	
-}
-
-int ft_check_map(t_game *game, t_str *map_buffer)
+int		ft_check_map(t_game *game, t_str *map_buffer)
 {
 	int		i;
 
 	i = 0;
-    if ((game->columns = check_top_bottom_borders(map_buffer)) <= 2
-        || (game->rows = check_left_right_borders(map_buffer)) <= 2
-        || check_valid(game, map_buffer) == 0)
-        return (0);
-    if (!(game->wd = (int**)malloc(sizeof(int*) * (game->rows))))
-        return(0);
-	while(i < game->rows)
+	if ((game->columns = check_top_bottom_borders(map_buffer)) <= 2
+			|| (game->rows = check_left_right_borders(map_buffer)) <= 2
+			|| check_valid(game, map_buffer) == 0)
+		return (0);
+	if (!(game->wd = (int**)malloc(sizeof(int*) * (game->rows))))
+		return (0);
+	while (i < game->rows)
 	{
 		if (!(game->wd[i] = (int*)malloc(sizeof(int) * (game->columns))))
 			return (0);

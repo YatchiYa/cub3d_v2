@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*   Updated: 2020/02/27 16:43:17 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ void			draw_wallxx(int x, int start, int end, t_game *t)
 		put_pxl_to_img(t, x, start, t->color);
 }
 
+void			draw_floor_c(int x, t_game *t)
+{
+	t->y = t->drawend - 1;
+	if (x < t->w && t->y < t->h)
+		while (++t->y < t->h)
+		{
+			t->color = t->F_color[0];
+			t->color = (t->color << 8) + t->F_color[1];
+			t->color = (t->color << 8) + t->F_color[2];
+			put_pxl_to_img(t, x, t->y, t->color);
+		}
+}
+
 void			draw_sky_floor(int x, t_game *t)
 {
 	if (t->texture == 0)
@@ -51,16 +64,6 @@ void			draw_sky_floor(int x, t_game *t)
 				}
 		}
 		if (t->drawend > 0)
-		{
-			t->y = t->drawend - 1;
-			if (x < t->w && t->y < t->h)
-				while (++t->y < t->h)
-				{
-					t->color = t->F_color[0];
-					t->color = (t->color << 8) + t->F_color[1];
-					t->color = (t->color << 8) + t->F_color[2];
-					put_pxl_to_img(t, x, t->y, t->color);
-				}
-		}
+			draw_floor_c(x, t);
 	}
 }

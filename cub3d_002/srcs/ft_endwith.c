@@ -6,7 +6,7 @@
 /*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 17:32:01 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/11/10 17:49:58 by ncolomer         ###   ########.fr       */
+/*   Updated: 2020/02/27 15:08:27 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_endwith(char *str, char *end)
 	while (end_length >= 0)
 	{
 		if (str[length] != end[end_length])
-			return(0);
+			return (0);
 		end_length--;
 		length--;
 	}

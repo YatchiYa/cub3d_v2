@@ -6,14 +6,13 @@
 /*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 12:09:03 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/11/13 14:28:10 by ncolomer         ###   ########.fr       */
+/*   Updated: 2020/02/27 16:34:54 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int
-	str_length(t_str *str)
+int		str_length(t_str *str)
 {
 	int	i;
 
@@ -49,8 +48,7 @@ void	str_add_back(t_str **str, char *content)
 	}
 }
 
-t_str
-	*str_last(t_str *str)
+t_str	*str_last(t_str *str)
 {
 	if (!str)
 		return (NULL);
@@ -59,8 +57,7 @@ t_str
 	return (str);
 }
 
-int
-	str_clear(t_str **list)
+int		str_clear(t_str **list)
 {
 	t_str	*tmp;
 

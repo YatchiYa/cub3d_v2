@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*   Created: 2019/11/08 18:21:51 by ncolomer          #+#    #+#             */
+/*   Updated: 2020/02/27 15:09:57 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int				wall_direction(t_game *ray)
+int	ft_isnum(char c)
 {
-	if (ray->side)
-		return ((ray->raydiry < 0) ? WALL_N : WALL_S);
-	return ((ray->raydirx < 0) ? WALL_W : WALL_E);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }
 
-int				wall_tex(t_game *ray)
+int	ft_isalphnum(char c)
 {
-	if (ray->side)
-		return ((ray->raydiry < 0) ? 1 : 2);
-	return ((ray->raydirx < 0) ? 3 : 4);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else if (c >= 'a' && c <= 'z')
+		return (1);
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	else
+		return (0);
 }

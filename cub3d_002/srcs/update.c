@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*   Updated: 2020/02/27 16:40:35 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,18 @@ void	redraw(t_game *g)
 	player(g);
 }
 
+void	pp(t_game *game, char *line, t_str *map_buffer, int fd)
+{
+	game->columns = ft_strlen(line);
+	game->rows = str_length(map_buffer);
+	if (ft_check_map(game, map_buffer) == 0)
+		exitit(" error map format ", game);
+	free(line);
+	close(fd);
+	str_clear(&map_buffer);
+}
 
-int 	pg(t_game *game, char *path)
+int		pg(t_game *game, char *path)
 {
 	int			fd;
 	t_str		*map_buffer;
@@ -32,27 +42,21 @@ int 	pg(t_game *game, char *path)
 
 	map_buffer = NULL;
 	if (ft_endwith(path, ".cub") == 0)
-        exitit(" not a valide map extension or not valid argument : please specify --save and .cub", game);
+		exitit(" not valid map :  please specify --save and .cub", game);
 	if ((fd = open(path, O_RDONLY)) < 0)
-        exitit(" can't open the file ", game);
+		exitit(" can't open the file ", game);
 	while ((ret = get_next_line(fd, &line)))
 	{
 		if (ft_parse_line(game, line, &map_buffer) == 0)
-        {
-            free(line);
+		{
+			free(line);
 			return (0);
-        }
+		}
 		free(line);
 	}
 	if (ret == 0 && ft_strlen(line) > 0)
-        str_add_back(&map_buffer, ft_strdup(line));
-    game->columns = ft_strlen(line);
-    game->rows = str_length(map_buffer);
-	if (ft_check_map(game, map_buffer) == 0)
-        exitit(" error map format ", game);
-	free(line);
-	close(fd);
-	str_clear(&map_buffer);
+		str_add_back(&map_buffer, ft_strdup(line));
+	pp(game, line, map_buffer, fd);
 	return (1);
 }
 
@@ -60,7 +64,7 @@ void	makewindow(t_game *g, int screen, char *path)
 {
 	g->mlx = mlx_init();
 	init_game(g);
-	if(pg (g, path) == 0)
+	if (pg(g, path) == 0)
 		exitit("error while parsing the file", g);
 	init_game_2(g);
 	g->img = mlx_new_image(g->mlx, g->w, g->h);

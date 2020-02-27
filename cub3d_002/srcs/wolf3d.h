@@ -286,9 +286,9 @@ int				str_clear(t_str **list);
 char	**ft_split(char const *s, char c);
 int 	parse_game_config(t_game *game, char *path);
 int parse_resolution(t_game *game_config, char *line);
-int parse_NOSOWEEA(t_game *game_config, char *line, char *mode);
+int parse_nosoweea(t_game *game_config, char *line, char *mode);
 int fill_rgb_color(t_game *game_config, char *str, char mode);
-int parse_FC_color(t_game *game_config, char *line, char mode);
+int parse_fc_color(t_game *game_config, char *line, char mode);
 int     parse_map(char *line, t_str **map_buffer);
 
 int ft_isalphnum(char c);
@@ -296,5 +296,8 @@ int ft_isnum(char c);
 int ft_check_map(t_game *game_config, t_str *map_buffer);
 void		init_game_2(t_game *g);
 int		ft_parse_line(t_game *game_config, char *line, t_str **map_buffer);
+int	rgb_c(t_game *game_config, char **tab, int *result, char mode);
+void	tx(t_game *game_config, int *result, char mode, char **tab);
+void			ft_fill_tab(int *tab, t_str *map_buffer);
 
 #endif

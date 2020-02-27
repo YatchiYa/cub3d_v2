@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/21 14:13:49 by yarab            ###   ########.fr       */
+/*   Updated: 2020/02/27 15:19:01 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ int			find_sprite(t_game *g)
 	nb = 0;
 	while (i < g->rows)
 	{
-		j = 0;
-		while (j < g->columns)
-		{
+		j = -1;
+		while (++j < g->columns)
 			if (g->wd[i][j] == 2 || g->wd[i][j] == 3)
 			{
 				g->sprite[nb] = g->wd[i][j] == 2 ?
@@ -43,8 +42,6 @@ int			find_sprite(t_game *g)
 				g->wd[i][j] = 0;
 				nb++;
 			}
-			j++;
-		}
 		i++;
 	}
 	if (nb == 0)
@@ -85,9 +82,8 @@ int			find_start_position(t_game *g)
 	nb = 0;
 	while (i < g->rows)
 	{
-		j = 0;
-		while (j < g->columns)
-		{
+		j = -1;
+		while (++j < g->columns)
 			if (g->wd[i][j] == 78 - 48 || g->wd[i][j] == 83 - 48 ||
 				g->wd[i][j] == 87 - 48 || g->wd[i][j] == 69 - 48)
 			{
@@ -97,8 +93,6 @@ int			find_start_position(t_game *g)
 				g->wd[i][j] = 0;
 				nb++;
 			}
-			j++;
-		}
 		i++;
 	}
 	if (nb > 1 || nb == 0)

@@ -24,7 +24,7 @@ int				main(int argc, char **argv)
 	if (argc < (2 + screen))
 		exitit("Error:\nno map specified.\n", g);
 	if (!(g = (t_game *)malloc(sizeof(t_game))))
-		return (0);
+		exitit("Error:\n could'n malloc .\n", g);
 	makewindow(g, screen, argv[1 + screen]);
 	return (EXIT_SUCCESS);
 }

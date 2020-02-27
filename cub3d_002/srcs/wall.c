@@ -40,9 +40,9 @@ void			draw_floor_c(int x, t_game *t)
 	if (x < t->w && t->y < t->h)
 		while (++t->y < t->h)
 		{
-			t->color = t->F_color[0];
-			t->color = (t->color << 8) + t->F_color[1];
-			t->color = (t->color << 8) + t->F_color[2];
+			t->color = t->f_color[0];
+			t->color = (t->color << 8) + t->f_color[1];
+			t->color = (t->color << 8) + t->f_color[2];
 			put_pxl_to_img(t, x, t->y, t->color);
 		}
 }
@@ -57,9 +57,9 @@ void			draw_sky_floor(int x, t_game *t)
 			if (x < t->w && t->y < t->h)
 				while (++t->y < t->drawstart)
 				{
-					t->color = t->C_color[0];
-					t->color = (t->color << 8) + t->C_color[1];
-					t->color = (t->color << 8) + t->C_color[2];
+					t->color = t->c_color[0];
+					t->color = (t->color << 8) + t->c_color[1];
+					t->color = (t->color << 8) + t->c_color[2];
 					put_pxl_to_img(t, x, t->y, t->color);
 				}
 		}

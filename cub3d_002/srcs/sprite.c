@@ -54,13 +54,13 @@ void	draw_sprite(t_game *e, t_game *rc, t_raysprite *rs)
 			{
 				rs->d = (rs->y) * 256 - e->h * 128 + rs->spriteheight * 128;
 				rs->texy = ((rs->d * 64) / rs->spriteheight) / 256;
-				if (e->tex_arr[7].data[rs->texy % texWidth *
+				if (e->tex_arr[7].data[rs->texy % 64 *
 					e->tex_arr[7].sizeline +
-					rs->texx % texWidth * e->tex_arr[7].bpp / 8] != 0)
+					rs->texx % 64 * e->tex_arr[7].bpp / 8] != 0)
 					ft_memcpy(e->imgpoke + 4 * e->w * rs->y + rs->stripe * 4,
-						&e->tex_arr[7].data[rs->texy % texWidth *
+						&e->tex_arr[7].data[rs->texy % 64 *
 						e->tex_arr[7].sizeline +
-						rs->texx % texWidth * e->tex_arr[7].bpp / 8],
+						rs->texx % 64 * e->tex_arr[7].bpp / 8],
 						sizeof(int));
 				rs->y++;
 			}

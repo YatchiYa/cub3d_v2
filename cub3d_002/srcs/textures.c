@@ -16,28 +16,28 @@ void		floor_c(t_game *g)
 {
 	int y;
 
-	g->distWall = g->perpwalldist;
-	g->distPlayer = 0.0;
+	g->distwall = g->perpwalldist;
+	g->distplayer = 0.0;
 	if (g->drawend < 0)
 		g->drawend = g->h;
 	y = g->drawend;
 	while (++y < g->h)
 	{
-		g->currentDist = g->h / (2.0 * y - g->h);
-		g->weight = (g->currentDist - g->distPlayer) /
-			(g->distWall - g->distPlayer);
-		g->currentFloorX = g->weight * g->floorXWall +
+		g->currentdist = g->h / (2.0 * y - g->h);
+		g->weight = (g->currentdist - g->distplayer) /
+			(g->distwall - g->distplayer);
+		g->currentfloorx = g->weight * g->floorxwall +
 			(1.0 - g->weight) * g->posx;
-		g->currentFloorY = g->weight * g->floorYWall +
+		g->currentfloory = g->weight * g->floorywall +
 			(1.0 - g->weight) * g->posy;
-		g->floorTexX = (int)(g->currentFloorX * texWidth) &
-			(texWidth - 1);
-		g->floorTexY = (int)(g->currentFloorY * texHeight) &
-			(texHeight - 1);
+		g->floortexx = (int)(g->currentfloorx * 64) &
+			(64 - 1);
+		g->floortexy = (int)(g->currentfloory * 64) &
+			(64 - 1);
 		ft_memcpy(g->imgpoke + 4 * g->w * y + g->x * 4,
-				&g->tex_arr[6].data[g->floorTexY % texWidth *
+				&g->tex_arr[6].data[g->floortexy % 64 *
 				g->tex_arr[6].sizeline +
-				g->floorTexX % texWidth * g->tex_arr[6].bpp / 8], sizeof(int));
+				g->floortexx % 64 * g->tex_arr[6].bpp / 8], sizeof(int));
 	}
 }
 
@@ -46,24 +46,24 @@ void		sky_c(t_game *g, int color)
 	int y;
 
 	y = 0;
-	g->distWall = g->perpwalldist;
-	g->distPlayer = 0.0;
+	g->distwall = g->perpwalldist;
+	g->distplayer = 0.0;
 	if (g->drawend < 0)
 		g->drawend = g->h;
 	y = 0;
 	while (++y < g->drawstart)
 	{
-		g->currentDist = g->h / (2.0 * y - g->h);
-		g->weight = (g->currentDist - g->distPlayer) /
-			(g->distWall - g->distPlayer);
-		g->currentFloorX = g->weight * g->floorXWall +
+		g->currentdist = g->h / (2.0 * y - g->h);
+		g->weight = (g->currentdist - g->distplayer) /
+			(g->distwall - g->distplayer);
+		g->currentfloorx = g->weight * g->floorxwall +
 			(1.0 - g->weight) * g->posx;
-		g->currentFloorY = g->weight * g->floorYWall +
+		g->currentfloory = g->weight * g->floorywall +
 			(1.0 - g->weight) * g->posy;
-		g->floorTexX = (int)(g->currentFloorX * texWidth) &
-			(texWidth - 1);
-		g->floorTexY = (int)(g->currentFloorY * texHeight) &
-			(texHeight - 1);
+		g->floortexx = (int)(g->currentfloorx * 64) &
+			(64 - 1);
+		g->floortexy = (int)(g->currentfloory * 64) &
+			(64 - 1);
 		ft_memcpy(g->imgpoke + 4 * g->w * y + g->x * 4,
 				&color, sizeof(int));
 	}
@@ -78,23 +78,23 @@ void		floor_cx(t_game *g)
 	g->x_wall -= floor((g->x_wall));
 	if (g->side == 0 && g->raydirx > 0)
 	{
-		g->floorXWall = g->mapx;
-		g->floorYWall = g->mapy + g->x_wall;
+		g->floorxwall = g->mapx;
+		g->floorywall = g->mapy + g->x_wall;
 	}
 	else if (g->side == 0 && g->raydirx < 0)
 	{
-		g->floorXWall = g->mapx + 1.0;
-		g->floorYWall = g->mapy + g->x_wall;
+		g->floorxwall = g->mapx + 1.0;
+		g->floorywall = g->mapy + g->x_wall;
 	}
 	else if (g->side == 1 && g->raydiry > 0)
 	{
-		g->floorXWall = g->mapx + g->x_wall;
-		g->floorYWall = g->mapy;
+		g->floorxwall = g->mapx + g->x_wall;
+		g->floorywall = g->mapy;
 	}
 	else
 	{
-		g->floorXWall = g->mapx + g->x_wall;
-		g->floorYWall = g->mapy + 1.0;
+		g->floorxwall = g->mapx + g->x_wall;
+		g->floorywall = g->mapy + 1.0;
 	}
 }
 

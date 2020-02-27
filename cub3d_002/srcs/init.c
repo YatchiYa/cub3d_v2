@@ -35,13 +35,13 @@ void		import_textures_2(t_game *g, int x, int y)
 							&g->tex_arr[5].bpp, &g->tex_arr[5].sizeline,
 							&g->tex_arr[5].endian);
 	if (!(g->tex_arr[6].img = mlx_xpm_file_to_image(g->mlx,
-					g->FT_texture, &x, &y)))
+					g->ft_texture, &x, &y)))
 		exitit("Error :\n error texture wall,", g);
 	g->tex_arr[6].data = mlx_get_data_addr(g->tex_arr[6].img,
 							&g->tex_arr[6].bpp, &g->tex_arr[6].sizeline,
 							&g->tex_arr[6].endian);
 	if (!(g->tex_arr[7].img = mlx_xpm_file_to_image(g->mlx,
-					g->S_texture, &x, &y)))
+					g->s_texture, &x, &y)))
 		exitit("Error :\n error texture wall,", g);
 	g->tex_arr[7].data = mlx_get_data_addr(g->tex_arr[7].img,
 							&g->tex_arr[7].bpp, &g->tex_arr[7].sizeline,
@@ -54,25 +54,25 @@ void		import_textures(t_game *g)
 	int x;
 	int y;
 
-	if (!(g->tex_arr[1].img = mlx_xpm_file_to_image(g->mlx, g->NO_texture,
+	if (!(g->tex_arr[1].img = mlx_xpm_file_to_image(g->mlx, g->no_texture,
 			&x, &y)))
 		exitit("Error :\n error texture wall,", g);
 	g->tex_arr[1].data = mlx_get_data_addr(g->tex_arr[1].img,
 							&g->tex_arr[1].bpp, &g->tex_arr[1].sizeline,
 							&g->tex_arr[1].endian);
 	if (!(g->tex_arr[2].img = mlx_xpm_file_to_image(g->mlx,
-					g->SO_texture, &x, &y)))
+					g->so_texture, &x, &y)))
 		exitit("Error :\n error texture wall,", g);
 	g->tex_arr[2].data = mlx_get_data_addr(g->tex_arr[2].img,
 							&g->tex_arr[2].bpp, &g->tex_arr[2].sizeline,
 							&g->tex_arr[2].endian);
 	if (!(g->tex_arr[3].img = mlx_xpm_file_to_image(g->mlx,
-					g->EA_texture, &x, &y)))
+					g->ea_texture, &x, &y)))
 		exitit("Error :\n error texture wall,", g);
 	g->tex_arr[3].data = mlx_get_data_addr(g->tex_arr[3].img,
 							&g->tex_arr[3].bpp, &g->tex_arr[3].sizeline,
 							&g->tex_arr[3].endian);
-	if (!(g->tex_arr[4].img = mlx_xpm_file_to_image(g->mlx, g->WE_texture,
+	if (!(g->tex_arr[4].img = mlx_xpm_file_to_image(g->mlx, g->we_texture,
 			&x, &y)))
 		exitit("Error :\n error texture wall,", g);
 	import_textures_2(g, x, y);

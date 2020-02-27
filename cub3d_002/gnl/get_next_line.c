@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 11:50:17 by yarab             #+#    #+#             */
-/*   Updated: 2019/12/10 11:50:22 by yarab            ###   ########.fr       */
+/*   Updated: 2020/02/27 18:40:19 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int		get_next_line(int fd, char **line)
 	*line = ft_substr(stock[fd], 0, i);
 	if ((ret == 0 && ft_strlenx(stock[fd]) > ft_strlenx(*line)) || ret > 0)
 		ret = 1;
-	ft_fill_static(&stock[fd], ft_substr(stock[fd], ++i, ft_strlenx(stock[fd])));
+	ft_fill_static(&stock[fd],
+			ft_substr(stock[fd], ++i, ft_strlenx(stock[fd])));
 	if (ret <= 0)
 	{
 		free(stock[fd]);

@@ -30,9 +30,9 @@ void			tx(t_game *game_config, int *result, char mode, char **tab)
 
 	i = 0;
 	if (mode == 'F')
-		game_config->F_color = result;
+		game_config->f_color = result;
 	else if (mode == 'C')
-		game_config->C_color = result;
+		game_config->c_color = result;
 	i = 0;
 	while (tab[i])
 	{

@@ -15,19 +15,19 @@
 void	tt(char *mode, t_game *game_config, char *used)
 {
 	if (ft_strcmp(mode, "NO") == 0)
-		game_config->NO_texture = ft_strdup(used);
+		game_config->no_texture = ft_strdup(used);
 	else if (ft_strcmp(mode, "SO") == 0)
-		game_config->SO_texture = ft_strdup(used);
+		game_config->so_texture = ft_strdup(used);
 	else if (ft_strcmp(mode, "WE") == 0)
-		game_config->WE_texture = ft_strdup(used);
+		game_config->we_texture = ft_strdup(used);
 	else if (ft_strcmp(mode, "EA") == 0)
-		game_config->EA_texture = ft_strdup(used);
+		game_config->ea_texture = ft_strdup(used);
 	else if (ft_strcmp(mode, "ST") == 0)
-		game_config->ST_texture = ft_strdup(used);
+		game_config->st_texture = ft_strdup(used);
 	else if (ft_strcmp(mode, "FT") == 0)
-		game_config->FT_texture = ft_strdup(used);
+		game_config->ft_texture = ft_strdup(used);
 	else if (ft_strcmp(mode, "S") == 0)
-		game_config->S_texture = ft_strdup(used);
+		game_config->s_texture = ft_strdup(used);
 }
 
 int		parse_nosoweea(t_game *game_config, char *line, char *mode)

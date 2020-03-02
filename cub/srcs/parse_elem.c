@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/27 16:27:04 by yarab            ###   ########.fr       */
+/*   Updated: 2020/03/02 16:37:50 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,16 @@ int		parse_map(char *line, t_str **map_buffer)
 
 	i = 0;
 	j = 0;
-	buffer = (char*)malloc(sizeof(char) * (ft_strlen(line) + 1));
-	while (line[i] && line[i] != ' ')
+	if (!(buffer = (char*)malloc(sizeof(char) * (ft_strlen(line) + 1))))
+		return (0);
+	while (line[i] != '\0')
 	{
-		buffer[j] = line[i];
+		if (line[i] != ' ' && line[i] != '\t')
+		{
+			buffer[j] = line[i];
+			j++;
+		}
 		i++;
-		j++;
 	}
 	buffer[j] = '\0';
 	str_add_back(map_buffer, ft_strdup(buffer));

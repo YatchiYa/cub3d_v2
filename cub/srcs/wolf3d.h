@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/27 18:39:01 by yarab            ###   ########.fr       */
+/*   Updated: 2020/03/02 15:38:04 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "../gnl/get_next_line.h"
 # include "../minilibx/mlx.h"
 
-# define HEIGHT 840
-# define WIDTH 1280
+# define HEIGHT 500
+# define WIDTH 500
 # define MAPH 10
 # define WALL_T 0x0D3558
 # define WALL_B 0x0B2D4B
@@ -204,6 +204,7 @@ typedef struct		s_game
 	int				floortexx;
 	int				floortexy;
 	double			*zbuffer;
+	char			*r_resolution;
 	char			*no_texture;
 	char			*so_texture;
 	char			*we_texture;
@@ -220,6 +221,7 @@ typedef struct		s_game
 }					t_game;
 
 void				exitit(char *str, t_game *g);
+void				exitit_2(char *str, t_game *g);
 int					close_win(t_game *g);
 void				draw_wall(t_game *g, int x);
 void				player(t_game *g);
@@ -287,5 +289,6 @@ int					rgb_c(t_game *game_config,
 		char **tab, int *result, char mode);
 void				tx(t_game *game_config, int *result, char mode, char **tab);
 void				ft_fill_tab(int *tab, t_str *map_buffer);
+void				check_texture_extension(t_game *g);
 
 #endif

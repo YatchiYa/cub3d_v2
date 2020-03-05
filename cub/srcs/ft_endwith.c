@@ -43,4 +43,6 @@ void	check_texture_extension(t_game *g)
 		exitit_2("Error wall textures extension <.xpm>", g);
 	if (g->s_texture && ft_endwith(g->s_texture, ".xpm") == 0)
 		exitit_2("Error sprite textures extension <.xpm>", g);
+	if (g->ft_texture && ft_endwith(g->ft_texture, ".xpm") == 0)
+		exitit_2("Error floor textures extension <.xpm>", g);
 }

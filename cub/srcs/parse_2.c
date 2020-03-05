@@ -43,10 +43,10 @@ void	parse_width(t_game *game_config, char *used)
 	int width;
 
 	width = ft_atoi(used);
-	if (width > 1980)
-		game_config->w = 1980;
-	else if (width < game_config->w)
-		;
+	if (width > 2560)
+		game_config->w = 2560;
+	else if (width < 800)
+		game_config->w = 800;
 	else
 		game_config->w = width;
 }
@@ -58,8 +58,8 @@ void	parse_height(t_game *game_config, char *used)
 	height = ft_atoi(used);
 	if (height > 1400)
 		game_config->h = 1400;
-	else if (height < game_config->h)
-		;
+	else if (height < 500)
+		game_config->h = 500;
 	else
 		game_config->h = height;
 }
@@ -72,8 +72,10 @@ void	bb(char *line, int i, t_game *game_config)
 	used = (char*)malloc(sizeof(char) * 6);
 	i = 0;
 	j = 0;
-	while (ft_isnum(line[i]) == 0 || line[i] == ' ')
+	while (line[i] == ' ')
 		i++;
+	if (ft_isnum(line[i]) == 0)
+		exitit_2("error resolution \n", game_config);
 	while (ft_isnum(line[i]))
 	{
 		used[j] = line[i];

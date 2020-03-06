@@ -6,11 +6,28 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/27 16:43:17 by yarab            ###   ########.fr       */
+/*   Updated: 2020/03/06 19:18:52 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void			trim_map(t_game *g, t_str *map_buffer)
+{
+	t_str	*first;
+	int		columns;
+
+	columns = 0;
+	first = map_buffer;
+	while (map_buffer)
+	{
+		if (columns < ft_strlen(map_buffer->content))
+			columns = ft_strlen(map_buffer->content);
+		map_buffer = map_buffer->next;
+	}
+	g->columns = columns;
+	map_buffer = first;
+}
 
 void			draw_wallxx(int x, int start, int end, t_game *t)
 {

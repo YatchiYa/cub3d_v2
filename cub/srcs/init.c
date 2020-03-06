@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/03/02 19:12:17 by yarab            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:34:03 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ void		import_textures_3(t_game *g, int x, int y)
 	if (g->ft_texture != NULL)
 	{
 		if (!(g->tex_arr[6].img = mlx_xpm_file_to_image(g->mlx,
-					g->ft_texture, &x, &y)))
-					exitit_2("Error :\n please specify floor textures ! needed,", g);
+						g->ft_texture, &x, &y)))
+			exitit_2("Error :\n please specify floor textures ! needed,", g);
 		g->tex_arr[6].data = mlx_get_data_addr(g->tex_arr[6].img,
 							&g->tex_arr[6].bpp, &g->tex_arr[6].sizeline,
 							&g->tex_arr[6].endian);
-
 	}
 }
 

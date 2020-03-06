@@ -12,6 +12,19 @@
 
 #include "wolf3d.h"
 
+void	clear_tab(char **str, t_game *g)
+{
+	int	i;
+
+	i = 0;
+	while (i < g->rows)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
 int		ft_count_index(char const *s, char c)
 {
 	unsigned int	index;

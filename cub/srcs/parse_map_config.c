@@ -19,11 +19,11 @@ int		ff(t_game *game_config, char *line, t_str **map_buffer, int i)
 	else if (line[i] == 'C')
 		return (parse_fc_color(game_config, &line[i + 1], 'C'));
 	else if (line[i] == '1')
-		return (parse_map(line + i, map_buffer));
-	else if (line[i] == ' ' || line[i] == '\n' || line[i] == '\0')
+		return (parse_map(line, map_buffer));
+	else if (line[i] == '\n' || line[i] == '\0')
 		return (1);
 	else
-		return (1);
+		return (0);
 }
 
 int		ft_parse_line(t_game *game_config, char *line, t_str **map_buffer)

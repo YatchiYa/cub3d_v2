@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/03/02 15:37:57 by yarab            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:33:12 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ void	redraw(t_game *g)
 
 void	pp(t_game *game, char *line, t_str *map_buffer, int fd)
 {
-	game->columns = ft_strlen(line);
 	game->rows = str_length(map_buffer);
 	if (ft_check_map(game, map_buffer) == 0)
-		exitit_2(" error map format ", game);
+		exitit_2(" error map format :( ", game);
 	free(line);
 	close(fd);
 	str_clear(&map_buffer);
@@ -56,6 +55,7 @@ int		pg(t_game *game, char *path)
 	}
 	if (ret == 0 && ft_strlen(line) > 0)
 		str_add_back(&map_buffer, ft_strdup(line));
+	trim_map(game, map_buffer);
 	pp(game, line, map_buffer, fd);
 	return (1);
 }

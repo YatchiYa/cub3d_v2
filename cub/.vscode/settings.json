@@ -4,6 +4,10 @@
         "string": "c",
         "string_view": "c",
         "vector": "c",
-        "wolf3d.h": "c"
+        "wolf3d.h": "c",
+        "ios": "c",
+        "memory": "c",
+        "utility": "c",
+        "sstream": "c"
     }
 }

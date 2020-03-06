@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 14:13:46 by yarab             #+#    #+#             */
-/*   Updated: 2020/03/02 15:38:04 by yarab            ###   ########.fr       */
+/*   Updated: 2020/03/06 19:17:06 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,5 +290,10 @@ int					rgb_c(t_game *game_config,
 void				tx(t_game *game_config, int *result, char mode, char **tab);
 void				ft_fill_tab(int *tab, t_str *map_buffer);
 void				check_texture_extension(t_game *g);
+void				ft_trimm(t_game *g, t_str *map_buffer);
+void				trim_map(t_game *g, t_str *map_buffer);
+void				clear_tab(char **str, t_game *g);
+int					checkk(char **str, t_game *g);
+int					cc(t_game *g, t_str *map_buffer);
 
 #endif

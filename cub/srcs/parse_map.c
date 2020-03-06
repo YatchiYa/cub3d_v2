@@ -6,7 +6,7 @@
 /*   By: yarab <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 16:44:28 by yarab             #+#    #+#             */
-/*   Updated: 2020/02/27 16:46:56 by yarab            ###   ########.fr       */
+/*   Updated: 2020/03/05 18:38:11 by yarab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int		count_check_columns(char const *line)
 	j = 0;
 	while (line[i])
 	{
-		if (line[i] == '1')
+		if (line[i] == '1' || line[i] == ' ')
 			j++;
-		else if (line[i] != ' ')
+		else
 			return (0);
 		i++;
 	}
-	return (j);
+	return (1);
 }
 
 int		check_left_right_borders(t_str *map_buffer)
@@ -45,16 +45,15 @@ int		check_left_right_borders(t_str *map_buffer)
 		while (map_buffer->content[first] == ' ')
 			first++;
 		last = ft_strlen(map_buffer->content) - 1;
-		while (last > 0 && last == ' ')
+		while (map_buffer->content[last] == ' ')
 			last--;
-		if (last <= 1
-			|| map_buffer->content[first] != '1'
+		if (map_buffer->content[first] != '1'
 			|| map_buffer->content[last] != '1')
 			return (0);
 		map_buffer = map_buffer->next;
 		i++;
 	}
-	return (i);
+	return (1);
 }
 
 int		check_top_bottom_borders(t_str *map_buffer)
@@ -71,31 +70,31 @@ int		check_top_bottom_borders(t_str *map_buffer)
 		last_line = count_check_columns(last->content);
 	else
 		last_line = 0;
-	if (first_line == last_line)
-		return (first_line);
-	return (0);
+	if (first_line == 0 || last_line == 0)
+		return (0);
+	return (1);
 }
 
-int		check_valid(t_game *config, t_str *map_buffer)
+int		check_valid(t_game *g, t_str *map_buffer)
 {
-	int	i;
-	int	col;
+	int		i;
+	t_str	*first;
 
+	first = map_buffer;
 	while (map_buffer)
 	{
 		i = 0;
-		col = 0;
 		while (map_buffer->content[i])
 		{
 			if (!ft_in_set(map_buffer->content[i], VALID_MAP_CHARACTERS))
 				return (0);
-			if (map_buffer->content[i++] != ' ')
-				col++;
+			i++;
 		}
-		if (col != config->columns)
-			return (0);
-		map_buffer = (map_buffer)->next;
+		map_buffer = map_buffer->next;
 	}
+	map_buffer = first;
+	if (cc(g, map_buffer) == 0)
+		return (0);
 	return (1);
 }
 
@@ -104,8 +103,8 @@ int		ft_check_map(t_game *game, t_str *map_buffer)
 	int		i;
 
 	i = 0;
-	if ((game->columns = check_top_bottom_borders(map_buffer)) <= 2
-			|| (game->rows = check_left_right_borders(map_buffer)) <= 2
+	if (check_top_bottom_borders(map_buffer) == 0
+			|| (check_left_right_borders(map_buffer) == 0)
 			|| check_valid(game, map_buffer) == 0)
 		return (0);
 	if (!(game->wd = (int**)malloc(sizeof(int*) * (game->rows))))

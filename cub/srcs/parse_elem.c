@@ -117,7 +117,7 @@ int		parse_map(char *line, t_str **map_buffer)
 		return (0);
 	while (line[i] != '\0')
 	{
-		if (line[i] != ' ' && line[i] != '\t')
+		if (line[i] != '\0')
 		{
 			buffer[j] = line[i];
 			j++;

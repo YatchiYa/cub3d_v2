@@ -34,6 +34,8 @@ int		rgb_c(t_game *game_config, char **tab, int *result, char mode)
 		}
 		i++;
 	}
+	if (i < 3)
+		return (0);
 	tx(game_config, result, mode, tab);
 	return (1);
 }
@@ -58,8 +60,8 @@ void	parse_height(t_game *game_config, char *used)
 	height = ft_atoi(used);
 	if (height > 1400)
 		game_config->h = 1400;
-	else if (height < 500)
-		game_config->h = 500;
+	else if (height < 600)
+		game_config->h = 600;
 	else
 		game_config->h = height;
 }

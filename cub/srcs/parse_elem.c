@@ -89,7 +89,7 @@ int		parse_fc_color(t_game *game_config, char *line, char mode)
 		i++;
 	if (ft_isnum(line[i]) == 0)
 		return (0);
-	while (line[i] && line[i] != ' ')
+	while (line[i])
 	{
 		used[j] = line[i];
 		j++;
